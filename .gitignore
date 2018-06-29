@@ -3,6 +3,8 @@ node_modules/
 build
 .firebaserc
 firebase-debug.log
+yarn.lock
+package-lock.json
 
 # dependencies
 /node_modules
