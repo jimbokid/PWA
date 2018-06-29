@@ -24,3 +24,13 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
+
+## Progressive web application optimization
+
+I use next solutions to speed up my application
+- Lazy load for images wich is not in view port
+- Service workers for offline work & for speed up all next visits after first
+- Infinite scroll
+
+
+
