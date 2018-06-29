@@ -32,5 +32,6 @@ I use next solutions to speed up my application
 - Service workers for offline work & for speed up all next visits after first
 - Infinite scroll
 
-
+## Lightouse results (WIP)
+[click here to view lighthouse report](https://googlechrome.github.io/lighthouse/viewer/?gist=9d0596f9c1cb63e3af4ada1a17f3dd4c)
 
