@@ -34,6 +34,14 @@ const styles = theme => ({
     margin: 'auto',
     width: '100%',
   },
+  searchWrapper: {
+    position: 'sticky',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 1,
+    background: '#fff',
+  },
 });
 
 export class DashboardComponent extends React.Component {
@@ -60,18 +68,19 @@ export class DashboardComponent extends React.Component {
     } = this.props;
 
     if (error) {
-      return <ErrorMessage error={error} id={'errorWrapper'}/>;
+      return <ErrorMessage error={error} id={'errorWrapper'} />;
     }
 
     return (
       <Layout>
         <div className={classes.cardLayout}>
-          <div />
-          <SearchField
-            fetchSearch={fetchSearch}
-            data={search}
-            clearSearch={clearSearch}
-          />
+          <div className={classes.searchWrapper}>
+            <SearchField
+              fetchSearch={fetchSearch}
+              data={search}
+              clearSearch={clearSearch}
+            />
+          </div>
           <InfiniteScroll
             dataLength={popular.results.length}
             next={fetchPopularMovies}

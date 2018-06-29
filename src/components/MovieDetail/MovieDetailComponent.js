@@ -90,6 +90,7 @@ export class MovieDetailComponent extends React.Component {
   componentWillUnmount() {
     const { cleanDetailPage } = this.props;
     cleanDetailPage();
+    window.scrollTo(0, 0);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -125,14 +126,14 @@ export class MovieDetailComponent extends React.Component {
             <div className={classes.movieInfo}>
               <Wrapper {...data}>
                 <Typography variant="display1" className={classes.movieTitle}>
-                  {data.title || data.original_name}
-                </Typography>
+                  {' '}
+                  {data.title || data.original_name}{' '}
+                </Typography>{' '}
               </Wrapper>
-
               <div className={classes.infoWrapper}>
                 <Typography variant="title" gutterBottom>
                   Genres:
-                </Typography>
+                </Typography>{' '}
                 {data.genres &&
                   data.genres.map(item => {
                     return (
@@ -146,16 +147,14 @@ export class MovieDetailComponent extends React.Component {
                         <Chip
                           label={genres[item.id]}
                           className={classes.chip}
-                        />
+                        />{' '}
                       </Link>
                     );
                   })}
-
                 <TitleTextComponent
                   title={'Vote average:'}
                   text={data.vote_average}
                 />
-
                 <TitleTextComponent
                   title={'Release Date:'}
                   text={
@@ -163,13 +162,10 @@ export class MovieDetailComponent extends React.Component {
                     moment(data.release_date).format('MMM DD YYYY')
                   }
                 />
-
                 <TitleTextComponent title={'Overview:'} text={data.overview} />
-
                 <Typography variant="title" gutterBottom>
                   Cast:
                 </Typography>
-
                 {credits && (
                   <MovieList
                     data={credits.cast}
@@ -179,11 +175,9 @@ export class MovieDetailComponent extends React.Component {
                     cols={2.2}
                   />
                 )}
-
                 <Typography variant="title" gutterBottom>
                   You can also watch:
                 </Typography>
-
                 {similar && (
                   <MovieList
                     data={similar.results}
@@ -191,11 +185,11 @@ export class MovieDetailComponent extends React.Component {
                     type={type}
                     cols={1.5}
                   />
-                )}
-              </div>
-            </div>
-          </React.Fragment>
-        </WithLoader>
+                )}{' '}
+              </div>{' '}
+            </div>{' '}
+          </React.Fragment>{' '}
+        </WithLoader>{' '}
       </Layout>
     );
   }

@@ -20,6 +20,7 @@ const styles = theme => ({
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit}px`,
+    position: 'relative',
   },
 });
 

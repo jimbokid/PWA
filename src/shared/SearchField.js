@@ -22,6 +22,8 @@ const styles = theme => ({
     width: '100%',
     position: 'absolute',
     background: '#fff',
+    maxHeight: '100vh',
+    overflowY: 'scroll',
   },
   avatar: {
     fontSize: 12,
@@ -32,7 +34,7 @@ const styles = theme => ({
   },
 });
 
-class SearchField extends React.Component {
+export class SearchField extends React.Component {
   state = {
     movieName: '',
   };
@@ -70,7 +72,7 @@ class SearchField extends React.Component {
               endAdornment: (
                 <InputAdornment position="end">
                   {this.state.movieName.length > 0 && (
-                    <IconButton onClick={this.clearSearch}>
+                    <IconButton onClick={this.clearSearch} id="clearBtn">
                       <Clear />
                     </IconButton>
                   )}
