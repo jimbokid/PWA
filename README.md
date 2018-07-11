@@ -36,5 +36,5 @@ I use next solutions to speed up my application
 - Infinite scroll
 
 ## Lightouse results (WIP)
-[click here to view lighthouse report](https://googlechrome.github.io/lighthouse/viewer/?gist=9d0596f9c1cb63e3af4ada1a17f3dd4c)
+[click here to view lighthouse report](https://googlechrome.github.io/lighthouse/viewer/?gist=d133973a0fd70c377be07f0914abe76e)
 
