@@ -6,7 +6,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Avatar from '@material-ui/core/Avatar';
-import deepOrange from '@material-ui/core/colors/deepOrange';
+import indigo from '@material-ui/core/colors/indigo';
 import CardMedia from '@material-ui/core/CardMedia';
 import CameraAlt from '@material-ui/icons/CameraAlt';
 import grey from '@material-ui/core/colors/grey';
@@ -52,7 +52,7 @@ const styles = theme => ({
     top: theme.spacing.unit,
     right: theme.spacing.unit,
     fontSize: 13,
-    backgroundColor: deepOrange[800],
+    backgroundColor: indigo[700],
   },
   cover: {
     display: 'flex',
