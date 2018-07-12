@@ -125,7 +125,7 @@ export class SearchResultsComponent extends React.Component {
         fetchByGenre(movieName);
         break;
       default:
-        return;
+        return false;
     }
   }
 
@@ -150,7 +150,7 @@ export class SearchResultsComponent extends React.Component {
         )}
         {movie &&
           movie.results.length > 0 && (
-            <React.Fragment>
+            <div id="movieWrapper">
               {searchType === 'searchByGenre' ? (
                 <InfiniteScroll
                   dataLength={movie.results.length}
@@ -162,14 +162,14 @@ export class SearchResultsComponent extends React.Component {
                   <MovieWrapper movie={movie} classes={classes} />
                 </InfiniteScroll>
               ) : (
-                <MovieWrapper movie={movie} classes={classes} id={"test"}/>
+                <MovieWrapper movie={movie} classes={classes} id={'test'} />
               )}
-            </React.Fragment>
+            </div>
           )}
 
         {tv &&
           tv.results.length > 0 && (
-            <React.Fragment>
+            <div id="tvWrapper">
               <Typography variant="title" gutterBottom>
                 Tv show
               </Typography>
@@ -205,12 +205,12 @@ export class SearchResultsComponent extends React.Component {
                     </Card>
                   );
                 })}
-            </React.Fragment>
+            </div>
           )}
 
         {person &&
           person.results.length > 0 && (
-            <React.Fragment>
+            <div id="personWrapper">
               <Typography variant="title" gutterBottom>
                 Person
               </Typography>
@@ -248,7 +248,7 @@ export class SearchResultsComponent extends React.Component {
                     </Card>
                   );
                 })}
-            </React.Fragment>
+            </div>
           )}
       </Layout>
     );

@@ -32,6 +32,7 @@ const defaultProps = {
   },
   fetchResultsSearch: jest.fn(),
   fetchByGenre: jest.fn(),
+  clearSearch: jest.fn(),
 };
 
 let setup;
@@ -47,5 +48,22 @@ describe('<SearchResultsComponent/>', () => {
   it('renders without crashing', () => {
     setup();
     expect(defaultProps.fetchResultsSearch).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render person list if person array isnt empty', () => {
+    const wrapper = setup({
+      data: {
+        searchResults: {
+          person: {
+            results: [{}],
+          },
+          tv: {
+            results: [{}],
+          },
+        },
+      },
+    });
+    expect(wrapper.find('#personWrapper').length).toBe(1);
+    expect(wrapper.find('#tvWrapper').length).toBe(1);
   });
 });

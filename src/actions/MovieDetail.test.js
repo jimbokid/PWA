@@ -46,6 +46,7 @@ describe('Dashboard actions', () => {
           },
         ],
       },
+      { data: {} },
     ];
 
     moxios.wait(() => {
@@ -66,6 +67,9 @@ describe('Dashboard actions', () => {
           genreList: { 1: 'name' },
           images: { data: {} },
           similar: { data: {} },
+          videos: {
+            data: {},
+          },
         },
         type: types.FETCH_MOVIE_DETAIL_SUCCESS,
       },

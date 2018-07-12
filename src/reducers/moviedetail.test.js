@@ -35,6 +35,9 @@ describe('settings reducers', () => {
       similar: {
         results: [],
       },
+      videos: {
+        results: [],
+      },
       images: {},
       genreList: {},
     };

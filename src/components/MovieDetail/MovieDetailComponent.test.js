@@ -22,6 +22,9 @@ const defaultProps = {
       type: 'type',
     },
   },
+  videos: {
+    results: [],
+  },
   genres: {},
   isLoading: false,
   error: null,

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import MovieList from '../../shared/MovieList';
 import moment from 'moment';
 import WithLoader from '../../shared/WithLoader';
+import VideoWrapper from '../../shared/VideoWrapper';
 import Chip from '@material-ui/core/Chip';
 import { Link } from 'react-router-dom';
 import ErrorMessage from '../../shared/ErrorMessage';
@@ -81,6 +82,14 @@ const Wrapper = styled.div`
 `;
 
 export class MovieDetailComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      openVideo: false,
+      showVideoClicked: false,
+    };
+  }
+
   componentWillMount() {
     const { match, fetchDetailMovie } = this.props;
     const { id, type } = match.params;
@@ -91,6 +100,10 @@ export class MovieDetailComponent extends React.Component {
     const { cleanDetailPage } = this.props;
     cleanDetailPage();
     window.scrollTo(0, 0);
+    this.setState({
+      openVideo: false,
+      showVideoClicked: false,
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -99,9 +112,19 @@ export class MovieDetailComponent extends React.Component {
       const { id, type } = nextProps.match.params;
       fetchDetailMovie(id, type);
       window.scrollTo(0, 0);
+      this.setState({
+        openVideo: false,
+        showVideoClicked: false,
+      });
     }
   }
 
+  handleVideo() {
+    this.setState({
+      openVideo: !this.state.openVideo,
+      showVideoClicked: true,
+    });
+  }
   render() {
     const {
       data,
@@ -112,6 +135,7 @@ export class MovieDetailComponent extends React.Component {
       genres,
       isLoading,
       error,
+      videos,
     } = this.props;
     const { type } = match.params;
 
@@ -163,6 +187,12 @@ export class MovieDetailComponent extends React.Component {
                   }
                 />
                 <TitleTextComponent title={'Overview:'} text={data.overview} />
+                <VideoWrapper
+                  data={videos.results}
+                  handleVideo={this.handleVideo.bind(this)}
+                  openVideo={this.state.openVideo}
+                  showVideoClicked={this.state.showVideoClicked}
+                />
                 <Typography variant="title" gutterBottom>
                   Cast:
                 </Typography>
@@ -185,11 +215,11 @@ export class MovieDetailComponent extends React.Component {
                     type={type}
                     cols={1.5}
                   />
-                )}{' '}
-              </div>{' '}
-            </div>{' '}
-          </React.Fragment>{' '}
-        </WithLoader>{' '}
+                )}
+              </div>
+            </div>
+          </React.Fragment>
+        </WithLoader>
       </Layout>
     );
   }

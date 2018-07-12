@@ -9,6 +9,7 @@ const mapStateToProps = ({ moviedetail }) => ({
   isLoading: moviedetail.isLoading,
   credits: moviedetail.credits,
   error: moviedetail.error,
+  videos: moviedetail.videos,
 });
 
 const mapDispatchToProps = dispatch => ({

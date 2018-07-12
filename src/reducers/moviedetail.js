@@ -11,6 +11,9 @@ export const defaultState = {
   similar: {
     results: [],
   },
+  videos: {
+    results: [],
+  },
   images: {},
   genres: [],
 };
@@ -32,6 +35,7 @@ export default (state = defaultState, { type, payload }) => {
         similar: payload.similar,
         images: payload.images,
         genres: payload.genreList,
+        videos: payload.videos,
         isLoading: false,
         error: null,
       };
