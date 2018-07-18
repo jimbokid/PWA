@@ -148,7 +148,19 @@ describe('Search actions', () => {
   });
 
   it('should call FETCH_RESULT_SEARCH_SUCCESS with payload', () => {
-    const promisesList = [{ data: [] }, { data: [] }, { data: [] }];
+    const promisesList = [
+      { data: [] },
+      { data: [] },
+      { data: [] },
+      {
+        genres: [
+          {
+            id: 1,
+            name: 'name',
+          },
+        ],
+      },
+    ];
 
     moxios.wait(() => {
       promisesList.forEach((item, index) => {
@@ -165,6 +177,9 @@ describe('Search actions', () => {
           movie: { data: [] },
           person: { data: [] },
           tv: { data: [] },
+          genre: {
+            1: 'name',
+          },
         },
         type: types.FETCH_RESULT_SEARCH_SUCCESS,
       },
@@ -178,28 +193,42 @@ describe('Search actions', () => {
   });
 
   it('should call FETCH_RESULT_SEARCH_SUCCESS with payload when u try to fetch genre', () => {
+    const promisesList = [
+      {
+        results: [
+          {
+            name: 'name',
+          },
+        ],
+      },
+      {
+        genres: [
+          {
+            id: 1,
+            name: 'name',
+          },
+        ],
+      },
+    ];
+
     moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.respondWith({
-        status: 200,
-        response: {
-          results: [
-            {
-              name: 'name',
-            },
-          ],
-        },
+      promisesList.forEach((item, index) => {
+        moxios.requests.at(index).respondWith({
+          status: 200,
+          response: item,
+        });
       });
     });
 
     const expectedActions = [
       {
         payload: {
+          genre: { '1': 'name' },
           movie: { results: [{ name: 'name' }] },
           person: null,
           tv: null,
         },
-        type: types.FETCH_RESULT_SEARCH_SUCCESS,
+        type: 'FETCH_RESULT_SEARCH_SUCCESS',
       },
     ];
 

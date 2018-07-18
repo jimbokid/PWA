@@ -105,9 +105,13 @@ export const MovieWrapper = ({ movie, classes, genres }) => {
                     <Typography variant="subheading" color="textSecondary">
                       {date}
                     </Typography>
-                    {item.genre_ids.map(inner => {
+                    {item.genre_ids.map((inner, key) => {
                       return (
-                        <Chip label={genres[inner]} className={classes.chip} />
+                        <Chip
+                          label={genres[inner]}
+                          className={classes.chip}
+                          key={key}
+                        />
                       );
                     })}
 

@@ -120,8 +120,10 @@ export const fetchByGenre = id => (dispatch, getState) => {
   const store = getState();
   const { movie_page } = store.search;
 
-  return axios
-    .get(`${API_PATH}genre/${id}/movies`, {
+  const url = [`${API_PATH}genre/${id}/movies`, `${API_PATH}genre/movie/list`];
+
+  const promises = url.map(item => {
+    return axios.get(item, {
       params: {
         api_key: API_TOKEN,
         language: LANGUAGE,
@@ -129,11 +131,23 @@ export const fetchByGenre = id => (dispatch, getState) => {
         region: REGION,
         include_adult: INCLUDE_ADULT,
       },
-    })
-    .then(res => {
-      dispatch(fetchResultsSearchSuccess(res.data, null, null));
-      return res;
-    })
+    });
+  });
+
+  return axios
+    .all(promises)
+    .then(
+      axios.spread((res, genre) => {
+        let genreList = {};
+
+        genre.data.genres.forEach(item => {
+          genreList[item.id] = item.name;
+        });
+
+        dispatch(fetchResultsSearchSuccess(res.data, null, null, genreList));
+        return [res, genre];
+      }),
+    )
     .catch(error => {
       dispatch(fetchSearchError(error));
       return error;
