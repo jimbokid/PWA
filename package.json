@@ -30,9 +30,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
     "test": "react-scripts test --env=jsdom --setupFiles ./src/setupTests.js --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/registerServiceWorker.js --collectCoverageFrom=!src/**/*Container.js",
-    "eject": "react-scripts eject",
-    "firebase-deploy": "firebase deploy --debug",
-    "build and deploy": "npm run build && firebase deploy --debug"
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "enzyme": "3.3.0",
