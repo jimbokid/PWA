@@ -28,7 +28,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
-## Available Scripts
+## Auto deploy with CI
 
 Also I setuped auto-deploy after any changes at master branch.
 I use [https://travis-ci.org/](https://travis-ci.org/)
