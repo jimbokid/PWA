@@ -7,13 +7,11 @@ before_install:
 cache:
   yarn: true
 install:
-- cd ./functions && yarn install && cd ..
-- cd ./client && yarn install && cd ..
+- yarn install
 script:
-- cd ./client && yarn build && cd ..
-- cd ./client && yarn test && cd ..
+- yarn build
 deploy:
   skip_cleanup: true
   provider: firebase
   token:
-    secure: [TOKEN OBMITTED - BUT CAN BE IN REPO]
+    secure: $FIREBASE_TOKEN
