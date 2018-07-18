@@ -38,12 +38,13 @@ export const clearSearch = () => ({
   type: types.CLEAR_SEATCH_RESSULTS,
 });
 
-export const fetchResultsSearchSuccess = (movie, tv, person) => ({
+export const fetchResultsSearchSuccess = (movie, tv, person, genre) => ({
   type: types.FETCH_RESULT_SEARCH_SUCCESS,
   payload: {
     movie,
     tv,
     person,
+    genre,
   },
 });
 
@@ -72,7 +73,12 @@ export const fetchSearch = name => dispatch => {
 };
 
 export const fetchResultsSearch = name => dispatch => {
-  const url = [SEARCH_MOVIE, SEARCH_TV, SEARCH_PERSON];
+  const url = [
+    SEARCH_MOVIE,
+    SEARCH_TV,
+    SEARCH_PERSON,
+    `${API_PATH}genre/movie/list`,
+  ];
 
   const promises = url.map(item => {
     return axios.get(item, {
@@ -87,9 +93,21 @@ export const fetchResultsSearch = name => dispatch => {
   return axios
     .all(promises)
     .then(
-      axios.spread((movie, tv, person) => {
-        dispatch(fetchResultsSearchSuccess(movie.data, tv.data, person.data));
-        return [movie, tv, person];
+      axios.spread((movie, tv, person, genre) => {
+        let genreList = {};
+
+        genre.data.genres.forEach(item => {
+          genreList[item.id] = item.name;
+        });
+        dispatch(
+          fetchResultsSearchSuccess(
+            movie.data,
+            tv.data,
+            person.data,
+            genreList,
+          ),
+        );
+        return [movie, tv, person, genre];
       }),
     )
     .catch(error => {

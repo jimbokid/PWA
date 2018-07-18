@@ -9,6 +9,7 @@ import {
 const mapStateToProps = ({ search }) => ({
   data: search,
   movie_results: search.movie_results,
+  genres: search.genre,
 });
 
 const mapDispatchToProps = dispatch => ({
