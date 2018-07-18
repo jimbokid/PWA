@@ -7,10 +7,9 @@ import MovieList from '../../shared/MovieList';
 import moment from 'moment';
 import WithLoader from '../../shared/WithLoader';
 import VideoWrapper from '../../shared/VideoWrapper';
-import Chip from '@material-ui/core/Chip';
-import { Link } from 'react-router-dom';
 import ErrorMessage from '../../shared/ErrorMessage';
 import TitleTextComponent from '../../shared/TitleTextComponent';
+import GenreList from '../../shared/GenreList';
 
 const styles = theme => ({
   media: {
@@ -158,23 +157,7 @@ export class MovieDetailComponent extends React.Component {
                 <Typography variant="title" gutterBottom>
                   Genres:
                 </Typography>{' '}
-                {data.genres &&
-                  data.genres.map(item => {
-                    return (
-                      <Link
-                        key={item.id}
-                        to={`/searchResults/searchByGenre/${item.id}/${
-                          genres[item.id]
-                        }`}
-                        className={classes.chipWrapper}
-                      >
-                        <Chip
-                          label={genres[item.id]}
-                          className={classes.chip}
-                        />{' '}
-                      </Link>
-                    );
-                  })}
+                <GenreList data={data.genres} genres={genres} />
                 <TitleTextComponent
                   title={'Vote average:'}
                   text={data.vote_average}

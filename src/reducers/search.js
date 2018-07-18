@@ -52,6 +52,7 @@ export default (state = defaultState, { type, payload }) => {
         movie_page: payload.movie.page + 1,
         movie_pages: payload.movie.total_pages,
         movie_results: payload.movie.total_results,
+        genre: payload.genre,
         error: null,
       };
     }

@@ -12,6 +12,7 @@ import deepOrange from '@material-ui/core/colors/deepOrange';
 import grey from '@material-ui/core/colors/grey';
 import CameraAlt from '@material-ui/icons/CameraAlt';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Chip from '@material-ui/core/Chip';
 
 const styles = theme => ({
   card: {
@@ -29,14 +30,19 @@ const styles = theme => ({
   },
   cover: {
     width: '40%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: grey[200],
+    paddingTop: '61%',
+    height: '0',
+    position: 'relative',
   },
   image: {
     width: '100%',
     height: '100%',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
   },
   controls: {
     display: 'flex',
@@ -56,9 +62,23 @@ const styles = theme => ({
     backgroundColor: deepOrange[500],
     fontSize: 14,
   },
+  icon: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    margin: 'auto',
+  },
+  chip: {
+    marginRight: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
+    height: 26,
+    cursor: 'pointer',
+  },
 });
 
-export const MovieWrapper = ({ movie, classes }) => {
+export const MovieWrapper = ({ movie, classes, genres }) => {
   return (
     <React.Fragment>
       <Typography variant="title" gutterBottom>
@@ -67,6 +87,7 @@ export const MovieWrapper = ({ movie, classes }) => {
       {movie &&
         movie.results.map((item, key) => {
           const date = moment(item.release_date).format('MMM Do YYYY');
+
           return (
             <Link
               to={`/moviedetail/movie/${item.id}`}
@@ -84,6 +105,12 @@ export const MovieWrapper = ({ movie, classes }) => {
                     <Typography variant="subheading" color="textSecondary">
                       {date}
                     </Typography>
+                    {item.genre_ids.map(inner => {
+                      return (
+                        <Chip label={genres[inner]} className={classes.chip} />
+                      );
+                    })}
+
                     <Avatar className={classes.avatar}>
                       {item.vote_average}
                     </Avatar>
@@ -136,7 +163,7 @@ export class SearchResultsComponent extends React.Component {
   }
 
   render() {
-    const { classes, match, fetchByGenre, movie_results } = this.props;
+    const { classes, match, fetchByGenre, movie_results, genres } = this.props;
     const { movie, tv, person } = this.props.data.searchResults;
 
     const { searchType, genreName, id } = match.params;
@@ -159,10 +186,19 @@ export class SearchResultsComponent extends React.Component {
                   }}
                   hasMore={movie.results.length < movie_results}
                 >
-                  <MovieWrapper movie={movie} classes={classes} />
+                  <MovieWrapper
+                    movie={movie}
+                    classes={classes}
+                    genres={genres}
+                  />
                 </InfiniteScroll>
               ) : (
-                <MovieWrapper movie={movie} classes={classes} id={'test'} />
+                <MovieWrapper
+                  movie={movie}
+                  classes={classes}
+                  id={'test'}
+                  genres={genres}
+                />
               )}
             </div>
           )}
@@ -242,7 +278,7 @@ export class SearchResultsComponent extends React.Component {
                             title="Live from space album cover"
                           />
                         ) : (
-                          <CameraAlt />
+                          <CameraAlt className={classes.icon} />
                         )}
                       </div>
                     </Card>
