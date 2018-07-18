@@ -74,7 +74,6 @@ export class DashboardComponent extends React.Component {
     return (
       <Layout>
         <div className={classes.cardLayout}>
-          <div>Test</div>
           <div className={classes.searchWrapper}>
             <SearchField
               fetchSearch={fetchSearch}

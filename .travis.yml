@@ -10,9 +10,13 @@ install:
 - yarn install
 script:
 - yarn build
+- yarn test -- --coverage
 deploy:
   skip_cleanup: true
   provider: firebase
   token:
     secure: $FIREBASE_TOKEN
-  project: react-pwa-d4fd9
+  project: $FIREBASE_PROJECT_ID
+after_deploy:
+  message: "Deploy === Success"
+
