@@ -188,7 +188,7 @@ export class SearchResultsComponent extends React.Component {
         title = `Best in "${genreName}" genre`;
         break;
       case 'searchByKeyword':
-        title = `Best by "${genreName}" keyword genre`;
+        title = `Best by "${genreName}" keyword`;
         break;
       default:
         return false;
