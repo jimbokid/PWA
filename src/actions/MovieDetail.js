@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_TOKEN, API_PATH, LANGUAGE } from '../constants/appConstants';
+import { genreGroup } from '../utils/actionHelpers';
 
 export const types = {
   FETCH_MOVIE_DETAIL_START: 'FETCH_MOVIE_DETAIL_START',
@@ -62,11 +63,7 @@ export const fetchDetailMovie = (id, type) => dispatch => {
     .then(
       axios.spread(
         (movie, similar, credits, images, genre, videos, keywords) => {
-          let genreList = {};
-
-          genre.data.genres.forEach(item => {
-            genreList[item.id] = item.name;
-          });
+          const genreList = genreGroup(genre.data.genres);
 
           dispatch(
             fetchDetailMovieSuccess(

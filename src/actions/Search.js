@@ -12,6 +12,7 @@ import {
   SEARCH_PERSON,
   SEARCH_TV,
 } from '../constants/dashboard';
+import { genreGroup } from '../utils/actionHelpers';
 
 export const types = {
   FETCH_SEARCH_START: 'FETCH_SEARCH_START',
@@ -138,11 +139,7 @@ export const fetchByGenre = id => (dispatch, getState) => {
     .all(promises)
     .then(
       axios.spread((res, genre) => {
-        let genreList = {};
-
-        genre.data.genres.forEach(item => {
-          genreList[item.id] = item.name;
-        });
+        const genreList = genreGroup(genre.data.genres);
 
         dispatch(fetchResultsSearchSuccess(res.data, null, null, genreList));
         return [res, genre];
@@ -175,11 +172,7 @@ export const fetchByKeyword = keyword_id => dispatch => {
     .all(promises)
     .then(
       axios.spread((res, genre) => {
-        let genreList = {};
-
-        genre.data.genres.forEach(item => {
-          genreList[item.id] = item.name;
-        });
+        const genreList = genreGroup(genre.data.genres);
 
         dispatch(fetchResultsSearchSuccess(res.data, null, null, genreList));
         return [res, genre];
