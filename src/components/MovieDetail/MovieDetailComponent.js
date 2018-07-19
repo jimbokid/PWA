@@ -149,7 +149,6 @@ export class MovieDetailComponent extends React.Component {
             <div className={classes.movieInfo}>
               <Wrapper {...data}>
                 <Typography variant="display1" className={classes.movieTitle}>
-                  {' '}
                   {data.title || data.original_name}{' '}
                 </Typography>{' '}
               </Wrapper>
@@ -165,8 +164,10 @@ export class MovieDetailComponent extends React.Component {
                 <TitleTextComponent
                   title={'Release Date:'}
                   text={
-                    data.release_date &&
-                    moment(data.release_date).format('MMM DD YYYY')
+                    (data.release_date &&
+                      moment(data.release_date).format('MMM DD YYYY')) ||
+                    (data.first_air_date &&
+                      moment(data.first_air_date).format('MMM DD YYYY'))
                   }
                 />
                 <TitleTextComponent title={'Overview:'} text={data.overview} />
