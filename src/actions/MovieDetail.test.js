@@ -47,6 +47,7 @@ describe('Dashboard actions', () => {
         ],
       },
       { data: {} },
+      { keywords: [] },
     ];
 
     moxios.wait(() => {
@@ -70,6 +71,7 @@ describe('Dashboard actions', () => {
           videos: {
             data: {},
           },
+          keywords: [],
         },
         type: types.FETCH_MOVIE_DETAIL_SUCCESS,
       },

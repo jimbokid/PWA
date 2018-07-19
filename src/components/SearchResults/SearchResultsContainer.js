@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {
   fetchResultsSearch,
   fetchByGenre,
+  fetchByKeyword,
   clearSearch,
 } from '../../actions/Search';
 
@@ -18,6 +19,9 @@ const mapDispatchToProps = dispatch => ({
   },
   fetchByGenre(id) {
     dispatch(fetchByGenre(id));
+  },
+  fetchByKeyword(keyword) {
+    dispatch(fetchByKeyword(keyword));
   },
   clearSearch() {
     dispatch(clearSearch());

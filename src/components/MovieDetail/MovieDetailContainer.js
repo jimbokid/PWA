@@ -10,6 +10,7 @@ const mapStateToProps = ({ moviedetail }) => ({
   credits: moviedetail.credits,
   error: moviedetail.error,
   videos: moviedetail.videos,
+  keywords: moviedetail.keywords,
 });
 
 const mapDispatchToProps = dispatch => ({

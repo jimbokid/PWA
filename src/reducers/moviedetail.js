@@ -16,6 +16,7 @@ export const defaultState = {
   },
   images: {},
   genres: [],
+  keywords: [],
 };
 
 export default (state = defaultState, { type, payload }) => {
@@ -36,6 +37,7 @@ export default (state = defaultState, { type, payload }) => {
         images: payload.images,
         genres: payload.genreList,
         videos: payload.videos,
+        keywords: payload.keywords,
         isLoading: false,
         error: null,
       };
