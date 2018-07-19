@@ -144,7 +144,12 @@ export const MovieWrapper = ({ movie, classes, genres }) => {
 
 export class SearchResultsComponent extends React.Component {
   componentWillMount() {
-    const { match, fetchResultsSearch, fetchByGenre } = this.props;
+    const {
+      match,
+      fetchResultsSearch,
+      fetchByGenre,
+      fetchByKeyword,
+    } = this.props;
     const movieName = match.params.id;
     const searchType = match.params.searchType;
 
@@ -154,6 +159,9 @@ export class SearchResultsComponent extends React.Component {
         break;
       case 'searchByGenre':
         fetchByGenre(movieName);
+        break;
+      case 'searchByKeyword':
+        fetchByKeyword(movieName);
         break;
       default:
         return false;
@@ -172,11 +180,25 @@ export class SearchResultsComponent extends React.Component {
 
     const { searchType, genreName, id } = match.params;
 
+    let title = '';
+    switch (searchType) {
+      case 'searchByName':
+        break;
+      case 'searchByGenre':
+        title = `Best in "${genreName}" genre`;
+        break;
+      case 'searchByKeyword':
+        title = `Best by "${genreName}" keyword genre`;
+        break;
+      default:
+        return false;
+    }
+
     return (
       <Layout>
-        {searchType === 'searchByGenre' && (
+        {title.length > 0 && (
           <Typography variant="title" gutterBottom>
-            Best in "{genreName}" genre
+            {title}
           </Typography>
         )}
         {movie &&

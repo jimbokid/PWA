@@ -40,6 +40,7 @@ describe('settings reducers', () => {
       },
       images: {},
       genreList: {},
+      keywords: [],
     };
 
     toEqualStates(
@@ -53,6 +54,7 @@ describe('settings reducers', () => {
         images: {},
         isLoading: false,
         similar: { results: [] },
+        keywords: [],
       },
     );
   });

@@ -153,3 +153,40 @@ export const fetchByGenre = id => (dispatch, getState) => {
       return error;
     });
 };
+
+export const fetchByKeyword = keyword_id => dispatch => {
+  const url = [
+    `${API_PATH}keyword/${keyword_id}/movies`,
+    `${API_PATH}genre/movie/list`,
+  ];
+
+  const promises = url.map(item => {
+    return axios.get(item, {
+      params: {
+        api_key: API_TOKEN,
+        language: LANGUAGE,
+        region: REGION,
+        include_adult: INCLUDE_ADULT,
+      },
+    });
+  });
+
+  return axios
+    .all(promises)
+    .then(
+      axios.spread((res, genre) => {
+        let genreList = {};
+
+        genre.data.genres.forEach(item => {
+          genreList[item.id] = item.name;
+        });
+
+        dispatch(fetchResultsSearchSuccess(res.data, null, null, genreList));
+        return [res, genre];
+      }),
+    )
+    .catch(error => {
+      dispatch(fetchSearchError(error));
+      return error;
+    });
+};

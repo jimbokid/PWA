@@ -135,6 +135,7 @@ export class MovieDetailComponent extends React.Component {
       isLoading,
       error,
       videos,
+      keywords,
     } = this.props;
     const { type } = match.params;
 
@@ -149,14 +150,12 @@ export class MovieDetailComponent extends React.Component {
             <div className={classes.movieInfo}>
               <Wrapper {...data}>
                 <Typography variant="display1" className={classes.movieTitle}>
-                  {data.title || data.original_name}{' '}
-                </Typography>{' '}
+                  {data.title || data.original_name}
+                </Typography>
               </Wrapper>
               <div className={classes.infoWrapper}>
-                <Typography variant="title" gutterBottom>
-                  Genres:
-                </Typography>{' '}
-                <GenreList data={data.genres} genres={genres} />
+                <GenreList data={data.genres} genres={genres} searchBy={'searchByGenre'} title={'Genres'}/>
+                <GenreList data={keywords} searchBy={'searchByKeyword'} title={'Keywords'}/>
                 <TitleTextComponent
                   title={'Vote average:'}
                   text={data.vote_average}

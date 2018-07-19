@@ -1,7 +1,13 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
-import { types, fetchByGenre, fetchSearch, fetchResultsSearch } from './Search';
+import {
+  types,
+  fetchByGenre,
+  fetchSearch,
+  fetchResultsSearch,
+  fetchByKeyword,
+} from './Search';
 import { fetchDetailPerson } from './PersonDetail';
 
 const middlewares = [thunk];
@@ -147,6 +153,35 @@ describe('Search actions', () => {
     });
   });
 
+  it('should call FETCH_SEARCH_ERROR in fetchByKeyword', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 404,
+        response: { error },
+      });
+    });
+
+    const expectedActions = [
+      {
+        payload: {
+          error: error,
+        },
+        type: types.FETCH_SEARCH_ERROR,
+      },
+    ];
+
+    const store = mockStore({
+      search: {
+        movie_page: 'movie_page',
+      },
+    });
+
+    return store.dispatch(fetchByKeyword(1)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
   it('should call FETCH_RESULT_SEARCH_SUCCESS with payload', () => {
     const promisesList = [
       { data: [] },
@@ -239,6 +274,57 @@ describe('Search actions', () => {
     });
 
     return store.dispatch(fetchByGenre(1)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('should call FETCH_RESULT_SEARCH_SUCCESS with payload when u try to fetch by keyword', () => {
+    const promisesList = [
+      {
+        results: [
+          {
+            name: 'name',
+          },
+        ],
+      },
+      {
+        genres: [
+          {
+            id: 1,
+            name: 'name',
+          },
+        ],
+      },
+    ];
+
+    moxios.wait(() => {
+      promisesList.forEach((item, index) => {
+        moxios.requests.at(index).respondWith({
+          status: 200,
+          response: item,
+        });
+      });
+    });
+
+    const expectedActions = [
+      {
+        payload: {
+          genre: { '1': 'name' },
+          movie: { results: [{ name: 'name' }] },
+          person: null,
+          tv: null,
+        },
+        type: 'FETCH_RESULT_SEARCH_SUCCESS',
+      },
+    ];
+
+    const store = mockStore({
+      search: {
+        movie_page: 'movie_page',
+      },
+    });
+
+    return store.dispatch(fetchByKeyword(1)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });

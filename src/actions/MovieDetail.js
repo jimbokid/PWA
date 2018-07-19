@@ -19,9 +19,10 @@ export const fetchDetailMovieSuccess = (
   images,
   genreList,
   videos,
+  keywords,
 ) => ({
   type: types.FETCH_MOVIE_DETAIL_SUCCESS,
-  payload: { data, similar, credits, images, genreList, videos },
+  payload: { data, similar, credits, images, genreList, videos, keywords },
 });
 
 export const fetchDetailMovieError = error => ({
@@ -44,6 +45,7 @@ export const fetchDetailMovie = (id, type) => dispatch => {
     `${API_PATH}${type}/${id}/images`,
     `${API_PATH}genre/movie/list`,
     `${API_PATH}${type}/${id}/videos`,
+    `${API_PATH}${type}/${id}/keywords`,
   ];
 
   const promises = url.map(item => {
@@ -58,25 +60,28 @@ export const fetchDetailMovie = (id, type) => dispatch => {
   return axios
     .all(promises)
     .then(
-      axios.spread((movie, similar, credits, images, genre, videos) => {
-        let genreList = {};
+      axios.spread(
+        (movie, similar, credits, images, genre, videos, keywords) => {
+          let genreList = {};
 
-        genre.data.genres.forEach(item => {
-          genreList[item.id] = item.name;
-        });
+          genre.data.genres.forEach(item => {
+            genreList[item.id] = item.name;
+          });
 
-        dispatch(
-          fetchDetailMovieSuccess(
-            movie.data,
-            similar.data,
-            credits.data,
-            images.data,
-            genreList,
-            videos.data,
-          ),
-        );
-        return [movie, similar, credits, images, genre];
-      }),
+          dispatch(
+            fetchDetailMovieSuccess(
+              movie.data,
+              similar.data,
+              credits.data,
+              images.data,
+              genreList,
+              videos.data,
+              keywords.data.keywords,
+            ),
+          );
+          return [movie, similar, credits, images, genre, keywords];
+        },
+      ),
     )
     .catch(error => {
       dispatch(fetchDetailMovieError(error));
