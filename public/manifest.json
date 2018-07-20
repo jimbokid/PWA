@@ -16,5 +16,5 @@
   "start_url": "/?utm_source=homescreen",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
-  "display": "fullscreen"
+  "display": "standalone"
 }
