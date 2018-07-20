@@ -151,11 +151,13 @@ export const fetchByGenre = id => (dispatch, getState) => {
     });
 };
 
-export const fetchByKeyword = keyword_id => dispatch => {
+export const fetchByKeyword = keyword_id => (dispatch, getState) => {
   const url = [
     `${API_PATH}keyword/${keyword_id}/movies`,
     `${API_PATH}genre/movie/list`,
   ];
+  const store = getState();
+  const { movie_page } = store.search;
 
   const promises = url.map(item => {
     return axios.get(item, {
@@ -163,6 +165,7 @@ export const fetchByKeyword = keyword_id => dispatch => {
         api_key: API_TOKEN,
         language: LANGUAGE,
         region: REGION,
+        page: movie_page,
         include_adult: INCLUDE_ADULT,
       },
     });
