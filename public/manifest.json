@@ -3,20 +3,18 @@
   "name": "Movie Search PWA",
   "icons": [
     {
-      "src": "/images/icon.png",
+      "src": "icon.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/images/icon.png",
+      "src": "icon.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "start_url": "https://react-pwa-d4fd9.firebaseapp.com/?utm_source=homescreen",
+  "start_url": "/?utm_source=homescreen",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "display": "fullscreen",
-  "lang": "English",
-  "orientation": "portrait"
 }
