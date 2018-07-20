@@ -175,7 +175,14 @@ export class SearchResultsComponent extends React.Component {
   }
 
   render() {
-    const { classes, match, fetchByGenre, movie_results, genres } = this.props;
+    const {
+      classes,
+      match,
+      fetchByGenre,
+      fetchByKeyword,
+      movie_results,
+      genres,
+    } = this.props;
     const { movie, tv, person } = this.props.data.searchResults;
 
     const { searchType, genreName, id } = match.params;
@@ -204,11 +211,16 @@ export class SearchResultsComponent extends React.Component {
         {movie &&
           movie.results.length > 0 && (
             <div id="movieWrapper">
-              {searchType === 'searchByGenre' ? (
+              {searchType === 'searchByGenre' ||
+              searchType === 'searchByKeyword' ? (
                 <InfiniteScroll
                   dataLength={movie.results.length}
                   next={() => {
-                    fetchByGenre(id);
+                    if (searchType === 'searchByGenre') {
+                      fetchByGenre(id);
+                    } else {
+                      fetchByKeyword(id);
+                    }
                   }}
                   hasMore={movie.results.length < movie_results}
                 >
