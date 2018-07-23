@@ -19,7 +19,7 @@ const TitleTextComponent = ({ title, text, classes }) => {
       {text ? (
         <Typography gutterBottom>{text}</Typography>
       ) : (
-        <div className={classes.emptyWrapper} />
+        <div className={`${classes.emptyWrapper} emptyWrapper`}/>
       )}
     </React.Fragment>
   );

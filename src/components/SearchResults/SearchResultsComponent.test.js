@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SearchResultsComponent } from './SearchResultsComponent';
+import { SearchResultsComponent, MovieWrapper } from './SearchResultsComponent';
 
 const defaultProps = {
   classes: {},
@@ -40,6 +40,27 @@ const defaultProps = {
 
 let setup;
 
+describe('<MovieWrapper/>', () => {
+  beforeEach(() => {
+    setup = props => {
+      props = { ...defaultProps, ...props };
+      return shallow(<MovieWrapper {...props} />);
+    };
+  });
+
+  it('renders without crashing', () => {
+    setup({
+      movie: {
+        results: [
+          {
+            genre_ids: [{}],
+          },
+        ],
+      },
+    });
+  });
+});
+
 describe('<SearchResultsComponent/>', () => {
   beforeEach(() => {
     setup = props => {
@@ -68,5 +89,71 @@ describe('<SearchResultsComponent/>', () => {
     });
     expect(wrapper.find('#personWrapper').length).toBe(1);
     expect(wrapper.find('#tvWrapper').length).toBe(1);
+  });
+
+  it('should call fetchByGenre', () => {
+    const wrapper = setup({
+      data: {
+        searchResults: {
+          movie: {
+            results: [{}],
+          },
+          person: {
+            results: [{}],
+          },
+          tv: {
+            results: [{}],
+          },
+        },
+      },
+      match: {
+        params: {
+          id: 1,
+          searchType: 'searchByGenre',
+          genreName: 'test',
+        },
+      },
+      movie_results: 10,
+    });
+
+    wrapper.find('InfiniteScroll').prop('next')();
+    expect(defaultProps.fetchByGenre).toHaveBeenCalledTimes(2);
+    expect(defaultProps.fetchByGenre).toHaveBeenCalledWith(1);
+  });
+
+  it('should call fetchByGenre', () => {
+    const wrapper = setup({
+      data: {
+        searchResults: {
+          movie: {
+            results: [{}],
+          },
+          person: {
+            results: [{}],
+          },
+          tv: {
+            results: [{}],
+          },
+        },
+      },
+      match: {
+        params: {
+          id: 1,
+          searchType: 'searchByKeyword',
+          genreName: 'test',
+        },
+      },
+      movie_results: 100,
+    });
+
+    wrapper.find('InfiniteScroll').prop('next')();
+    expect(defaultProps.fetchByKeyword).toHaveBeenCalledTimes(2);
+    expect(defaultProps.fetchByKeyword).toHaveBeenCalledWith(1);
+  });
+
+  it('have to clear search after umount', () => {
+    const wrapper = setup();
+    wrapper.unmount();
+    expect(defaultProps.clearSearch).toHaveBeenCalledTimes(1);
   });
 });
