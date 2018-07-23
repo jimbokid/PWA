@@ -16,9 +16,9 @@ const styles = theme => ({
   },
 });
 
-const GenreList = ({ data, genres, classes, searchBy, title }) => {
+export const GenreList = ({ data, genres, classes, searchBy, title }) => {
   return (
-    <div>
+    <div className={'genreList'}>
       <Typography variant="title" gutterBottom>
         {title}:
       </Typography>

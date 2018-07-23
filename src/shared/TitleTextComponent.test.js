@@ -1,22 +1,20 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import VideoWrapper from './VideoWrapper';
+import TitleTextComponent from './TitleTextComponent';
 
 const defaultProps = {
-  data: [{}],
+  title: 'title',
+  text: 'text',
   classes: {},
-  handleVideo: jest.fn(),
-  openVideo: false,
-  showVideoClicked: false,
 };
 
 let setup;
 
-describe('<VideoWrapper/>', () => {
+describe('<TitleTextComponent/>', () => {
   beforeEach(() => {
     setup = props => {
       props = { ...defaultProps, ...props };
-      return mount(<VideoWrapper {...props} />);
+      return mount(<TitleTextComponent {...props} />);
     };
   });
   afterEach(() => {
@@ -25,9 +23,12 @@ describe('<VideoWrapper/>', () => {
 
   it('renders without crashing', () => {
     setup();
+  });
 
-    setup({
-      openVideo: true,
+  it('should render empty wrapper', () => {
+    const wrapper = setup({
+      text: null,
     });
+    expect(wrapper.find('.emptyWrapper').length).toBe(1);
   });
 });

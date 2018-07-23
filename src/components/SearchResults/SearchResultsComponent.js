@@ -198,7 +198,7 @@ export class SearchResultsComponent extends React.Component {
         title = `Best by "${genreName}" keyword`;
         break;
       default:
-        return false;
+        title = null;
     }
 
     return (

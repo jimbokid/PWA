@@ -1,10 +1,15 @@
-import * as React from 'react';
-import { mount } from 'enzyme';
-import GenreList from './GenreList';
+import React from 'react';
+import { shallow } from 'enzyme';
+import { GenreList } from './GenreList';
 
 const defaultProps = {
-  data: [],
-  genres: {},
+  data: [
+    {
+      name: 'test',
+      id: 1,
+    },
+  ],
+  genres: null,
   classes: {},
   searchBy: 'string',
   title: 'string',
@@ -16,7 +21,7 @@ describe('<GenreList/>', () => {
   beforeEach(() => {
     setup = props => {
       props = { ...defaultProps, ...props };
-      return mount(<GenreList {...props} />);
+      return shallow(<GenreList {...props} />);
     };
   });
   afterEach(() => {
@@ -24,6 +29,15 @@ describe('<GenreList/>', () => {
   });
 
   it('renders without crashing', () => {
-    setup();
+    const wrapper = setup();
+    expect(wrapper.find('Link').length).toBe(1);
+  });
+
+  it('check correct render of genres ', () => {
+    setup({
+      genres: {
+        1: 'test',
+      },
+    });
   });
 });
