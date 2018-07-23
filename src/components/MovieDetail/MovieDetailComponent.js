@@ -10,6 +10,7 @@ import VideoWrapper from '../../shared/VideoWrapper';
 import ErrorMessage from '../../shared/ErrorMessage';
 import TitleTextComponent from '../../shared/TitleTextComponent';
 import GenreList from '../../shared/GenreList';
+import PropTypes from 'prop-types';
 
 const styles = theme => ({
   media: {
@@ -98,7 +99,6 @@ export class MovieDetailComponent extends React.Component {
   componentWillUnmount() {
     const { cleanDetailPage } = this.props;
     cleanDetailPage();
-    window.scrollTo(0, 0);
     this.setState({
       openVideo: false,
       showVideoClicked: false,
@@ -154,8 +154,17 @@ export class MovieDetailComponent extends React.Component {
                 </Typography>
               </Wrapper>
               <div className={classes.infoWrapper}>
-                <GenreList data={data.genres} genres={genres} searchBy={'searchByGenre'} title={'Genres'}/>
-                <GenreList data={keywords} searchBy={'searchByKeyword'} title={'Keywords'}/>
+                <GenreList
+                  data={data.genres}
+                  genres={genres}
+                  searchBy={'searchByGenre'}
+                  title={'Genres'}
+                />
+                <GenreList
+                  data={keywords}
+                  searchBy={'searchByKeyword'}
+                  title={'Keywords'}
+                />
                 <TitleTextComponent
                   title={'Vote average:'}
                   text={data.vote_average}
@@ -207,5 +216,18 @@ export class MovieDetailComponent extends React.Component {
     );
   }
 }
+
+MovieDetailComponent.propTypes = {
+  data: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  similar: PropTypes.object.isRequired,
+  credits: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  genres: PropTypes.object.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  error: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+  videos: PropTypes.object.isRequired,
+  keywords: PropTypes.array.isRequired,
+};
 
 export default withStyles(styles)(MovieDetailComponent);

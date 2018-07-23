@@ -33,6 +33,9 @@ const defaultProps = {
   fetchResultsSearch: jest.fn(),
   fetchByGenre: jest.fn(),
   clearSearch: jest.fn(),
+  fetchByKeyword: jest.fn(),
+  movie_results: 0,
+  genres: {},
 };
 
 let setup;

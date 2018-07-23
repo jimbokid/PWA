@@ -41,6 +41,7 @@ describe('personal detail reducers', () => {
       },
       tv: { results: [] },
       person: { results: [] },
+      genre: [],
     };
 
     toEqualStates(
@@ -62,6 +63,7 @@ describe('personal detail reducers', () => {
         movie_pages: 1,
         movie_results: 1,
         error: null,
+        genre: [],
       },
     );
   });

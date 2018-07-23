@@ -15,7 +15,7 @@ export const defaultState = {
     results: [],
   },
   images: {},
-  genres: [],
+  genres: {},
   keywords: [],
 };
 

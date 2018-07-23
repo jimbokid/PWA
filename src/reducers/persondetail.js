@@ -4,6 +4,7 @@ export const defaultState = {
   data: {},
   isLoading: false,
   error: null,
+  movies: [],
 };
 
 export default (state = defaultState, { type, payload }) => {

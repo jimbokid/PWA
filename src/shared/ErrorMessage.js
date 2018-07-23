@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Layout from './Layout';
 import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
 
 export const ErrorMessage = ({ error }) => {
   return (
@@ -12,6 +13,10 @@ export const ErrorMessage = ({ error }) => {
       <Typography gutterBottom>{error.response.data.status_message}</Typography>
     </Layout>
   );
+};
+
+ErrorMessage.propTypes = {
+  error: PropTypes.object.isRequired,
 };
 
 export default ErrorMessage;

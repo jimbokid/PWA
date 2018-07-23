@@ -30,6 +30,7 @@ const defaultProps = {
   error: null,
   fetchDetailMovie: jest.fn(),
   cleanDetailPage: jest.fn(),
+  keywords: [],
 };
 
 let setup;

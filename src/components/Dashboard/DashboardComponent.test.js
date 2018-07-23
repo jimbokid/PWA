@@ -9,7 +9,7 @@ const defaultProps = {
   },
   fetchSearch: jest.fn(),
   fetchPopularMovies: jest.fn(),
-  search: {},
+  search: [],
   clearSearch: jest.fn(),
   total_results: 0,
   error: null,

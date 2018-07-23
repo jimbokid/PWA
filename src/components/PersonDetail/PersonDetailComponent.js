@@ -7,7 +7,7 @@ import WithLoader from '../../shared/WithLoader';
 import Avatar from '@material-ui/core/Avatar';
 import MovieList from '../../shared/MovieList';
 import TitleTextComponent from '../../shared/TitleTextComponent';
-import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 const styles = {
   row: {
@@ -29,11 +29,8 @@ export class PersonDetailComponent extends React.Component {
     fetchDetailPerson(id);
   }
   componentWillUnmount() {
-    ReactDOM.findDOMNode(this).scrollTop = 0;
     const { cleanPersonPage } = this.props;
-
     cleanPersonPage();
-    window.scrollTo(0, 0);
   }
   render() {
     const { data, classes, isLoading, movies } = this.props;
@@ -74,5 +71,12 @@ export class PersonDetailComponent extends React.Component {
     );
   }
 }
+
+PersonDetailComponent.propTypes = {
+  data: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  movies: PropTypes.array.isRequired,
+};
 
 export default withStyles(styles)(PersonDetailComponent);

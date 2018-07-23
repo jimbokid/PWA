@@ -13,6 +13,7 @@ import grey from '@material-ui/core/colors/grey';
 import CameraAlt from '@material-ui/icons/CameraAlt';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Chip from '@material-ui/core/Chip';
+import PropTypes from 'prop-types';
 
 const styles = theme => ({
   card: {
@@ -171,7 +172,6 @@ export class SearchResultsComponent extends React.Component {
   componentWillUnmount() {
     const { clearSearch } = this.props;
     clearSearch();
-    window.scrollTo(0, 0);
   }
 
   render() {
@@ -328,5 +328,14 @@ export class SearchResultsComponent extends React.Component {
     );
   }
 }
+
+SearchResultsComponent.propTypes = {
+  classes: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  fetchByGenre: PropTypes.func.isRequired,
+  fetchByKeyword: PropTypes.func.isRequired,
+  movie_results: PropTypes.number.isRequired,
+  genres: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(SearchResultsComponent);

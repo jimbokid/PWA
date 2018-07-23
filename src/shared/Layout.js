@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 
 const styles = theme => ({
   container: {
@@ -24,17 +25,27 @@ const styles = theme => ({
   },
 });
 
-export const Layout = ({ classes, children }) => (
-  <div className={classes.container}>
-    <Header />
-    <div className={classes.content}>
-      <div className={classes.contentInner}>{children}</div>
-    </div>
-  </div>
-);
+export class Layout extends React.Component {
+  componentWillUnmount() {
+    ReactDOM.findDOMNode(this).scrollTop = 0;
+    window.scrollTo(0, 0);
+  }
+  render() {
+    const { classes, children } = this.props;
+    return (
+      <div className={classes.container}>
+        <Header />
+        <div className={classes.content}>
+          <div className={classes.contentInner}>{children}</div>
+        </div>
+      </div>
+    );
+  }
+}
 
 Layout.propTypes = {
   classes: PropTypes.object.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]),
 };
 
 export default withStyles(styles, { name: 'Layout' })(Layout);

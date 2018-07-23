@@ -10,7 +10,7 @@ const defaultProps = {
     place_of_birth: 'place_of_birth',
     biography: 'biography',
   },
-  movies: null,
+  movies: [],
   match: {
     params: {
       id: 1,
@@ -18,6 +18,7 @@ const defaultProps = {
   },
   fetchDetailPerson: jest.fn(),
   cleanPersonPage: jest.fn(),
+  isLoading: false,
 };
 
 let setup;

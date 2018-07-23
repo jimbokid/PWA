@@ -9,6 +9,8 @@ export const defaultState = {
       results: [],
     },
   },
+  genre: {},
+  movie_results: 0,
   movie_page: 1,
   error: null,
 };

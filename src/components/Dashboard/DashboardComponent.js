@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import MovieList from '../../shared/MovieList';
 import SearchField from '../../shared/SearchField';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import PropTypes from 'prop-types';
 
 const styles = theme => ({
   card: {
@@ -93,5 +94,16 @@ export class DashboardComponent extends React.Component {
     );
   }
 }
+
+DashboardComponent.propTypes = {
+  classes: PropTypes.object.isRequired,
+  popular: PropTypes.object.isRequired,
+  fetchSearch: PropTypes.func.isRequired,
+  fetchPopularMovies: PropTypes.func.isRequired,
+  search: PropTypes.array.isRequired,
+  clearSearch: PropTypes.func.isRequired,
+  total_results: PropTypes.number,
+  error: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+};
 
 export default withStyles(styles)(DashboardComponent);
