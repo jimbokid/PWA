@@ -12,7 +12,7 @@ script:
 - yarn build
 - yarn test -- --coverage
 after_script:
-- COVERALLS_REPO_TOKEN=$COVERALLS_TOKEN npm run coveralls
+- COVERALLS_REPO_TOKEN=$COVERALLS_TOKEN yarn coveralls
 deploy:
   skip_cleanup: true
   provider: firebase
