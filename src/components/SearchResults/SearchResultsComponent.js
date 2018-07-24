@@ -129,7 +129,6 @@ export const MovieWrapper = ({ movie, classes, genres }) => {
                       image={`https://image.tmdb.org/t/p/w300/${
                         item.poster_path
                       }`}
-                      title="Live from space album cover"
                     />
                   ) : (
                     <CameraAlt />
@@ -140,6 +139,30 @@ export const MovieWrapper = ({ movie, classes, genres }) => {
           );
         })}
     </React.Fragment>
+  );
+};
+
+export const CardWrapper = props => {
+  const { classes, linkPath, imagePath, personCard, item } = props;
+  const poster = personCard ? item.profile_path : item.poster_path;
+
+  return (
+    <Card className={classes.card}>
+      <div className={classes.details}>
+        <CardContent className={classes.content}>
+          <Link to={`${linkPath}/${item.id}`} className={classes.item}>
+            <Typography variant="title" gutterBottom>
+              {item.name}
+            </Typography>
+          </Link>
+          <Typography variant="body2" color="textSecondary">
+            {item.date}
+          </Typography>
+          <Avatar>{item.voteAverage}</Avatar>
+        </CardContent>
+      </div>
+      <CardMedia className={classes.cover} image={`${imagePath}/${poster}`} />
+    </Card>
   );
 };
 
@@ -165,7 +188,7 @@ export class SearchResultsComponent extends React.Component {
         fetchByKeyword(movieName);
         break;
       default:
-        return false;
+        break;
     }
   }
 
@@ -251,32 +274,17 @@ export class SearchResultsComponent extends React.Component {
                 tv.results.map((item, key) => {
                   const date = moment(item.release_date).format('MMM Do YYYY');
                   return (
-                    <Card className={classes.card} key={key}>
-                      <div className={classes.details}>
-                        <CardContent className={classes.content}>
-                          <Link
-                            to={`/moviedetail/tv/${item.id}`}
-                            className={classes.item}
-                            aria-label="movie detail page"
-                          >
-                            <Typography variant="title" gutterBottom>
-                              {item.name}
-                            </Typography>
-                          </Link>
-                          <Typography variant="body2" color="textSecondary">
-                            {date}
-                          </Typography>
-                          <Avatar>{item.vote_average}</Avatar>
-                        </CardContent>
-                      </div>
-                      <CardMedia
-                        className={classes.cover}
-                        image={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${
-                          item.poster_path
-                        }`}
-                        title="Live from space album cover"
-                      />
-                    </Card>
+                    <CardWrapper
+                      classes={classes}
+                      key={key}
+                      item={item}
+                      date={date}
+                      linkPath={'/moviedetail/tv'}
+                      imagePath={
+                        'https://image.tmdb.org/t/p/w300_and_h450_bestv2'
+                      }
+                      personCard={false}
+                    />
                   );
                 })}
             </div>
@@ -291,35 +299,14 @@ export class SearchResultsComponent extends React.Component {
               {person &&
                 person.results.map((item, key) => {
                   return (
-                    <Card className={classes.card} key={key}>
-                      <div className={classes.details}>
-                        <CardContent className={classes.content}>
-                          <Link
-                            to={`/persondetail/${item.id}`}
-                            className={classes.item}
-                            aria-label="person detail page"
-                          >
-                            <Typography variant="title" gutterBottom>
-                              {item.name}
-                            </Typography>
-                          </Link>
-                          <Avatar>{item.vote_average}</Avatar>
-                        </CardContent>
-                      </div>
-                      <div className={classes.cover}>
-                        {item.profile_path ? (
-                          <CardMedia
-                            className={classes.image}
-                            image={`https://image.tmdb.org/t/p/w300/${
-                              item.profile_path
-                            }`}
-                            title="Live from space album cover"
-                          />
-                        ) : (
-                          <CameraAlt className={classes.icon} />
-                        )}
-                      </div>
-                    </Card>
+                    <CardWrapper
+                      classes={classes}
+                      key={key}
+                      item={item}
+                      linkPath={'/moviedetail/tv'}
+                      imagePath={'https://image.tmdb.org/t/p/w300'}
+                      personCard={true}
+                    />
                   );
                 })}
             </div>
@@ -336,6 +323,14 @@ SearchResultsComponent.propTypes = {
   fetchByKeyword: PropTypes.func.isRequired,
   movie_results: PropTypes.number.isRequired,
   genres: PropTypes.object.isRequired,
+};
+
+CardWrapper.propTypes = {
+  classes: PropTypes.object.isRequired,
+  linkPath: PropTypes.string.isRequired,
+  imagePath: PropTypes.string.isRequired,
+  personCard: PropTypes.bool.isRequired,
+  item: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(SearchResultsComponent);

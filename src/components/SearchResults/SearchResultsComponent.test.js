@@ -1,6 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SearchResultsComponent, MovieWrapper } from './SearchResultsComponent';
+import {
+  SearchResultsComponent,
+  MovieWrapper,
+  CardWrapper,
+} from './SearchResultsComponent';
 
 const defaultProps = {
   classes: {},
@@ -17,7 +21,7 @@ const defaultProps = {
         ],
       },
       tv: {
-        results: [],
+        results: [{}],
       },
       person: {
         results: [],
@@ -155,5 +159,16 @@ describe('<SearchResultsComponent/>', () => {
     const wrapper = setup();
     wrapper.unmount();
     expect(defaultProps.clearSearch).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render CardWrapper', () => {
+    const props = {
+      classes: {},
+      linkPath: 'linkPath',
+      imagePath: 'imagePath',
+      personCard: false,
+      item: {},
+    };
+    shallow(<CardWrapper {...props} />);
   });
 });
