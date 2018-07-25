@@ -6,6 +6,15 @@
 ## Demo
 [click here to look demo](https://react-pwa-d4fd9.firebaseapp.com/)
 
+<div>
+<img src="../assets/screenshots/main_screen.jpg?raw=true" width="250" align="left"> 
+<img src="../assets/screenshots/movie_detail.jpg?raw=true" width="250" align="left">
+<img src="../assets/screenshots/search_by_genre.jpg?raw=true" width="250" align="left">
+<img src="../assets/screenshots/search_panel.jpg?raw=true" width="250" align="left">
+<img src="../assets/screenshots/search_results.jpg?raw=true" width="250" align="left">
+<img src="../assets/screenshots/phone_desktop.jpg?raw=true" width="250">
+</div>
+
 ## Available Scripts
 
 In the project directory, you can run:
