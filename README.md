@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/jimbokid/PWA/badge.svg?branch=master)](https://coveralls.io/github/jimbokid/PWA?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/jimbokid/PWA/badge.svg?branch=master&service=github)](https://coveralls.io/github/jimbokid/PWA?branch=master)
 [![Build Status](https://travis-ci.org/jimbokid/PWA.svg?branch=master)](https://travis-ci.org/jimbokid/PWA)
 
 # Progressive web application example
