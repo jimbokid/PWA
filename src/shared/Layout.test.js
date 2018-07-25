@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import Layout from './Layout';
+import { Layout } from './Layout';
 
 const defaultProps = {
   classes: {},
@@ -12,11 +12,7 @@ describe('<Layout/>', () => {
   beforeEach(() => {
     setup = props => {
       props = { ...defaultProps, ...props };
-      return shallow(
-        <Layout {...props}>
-          <div id="test">Test</div>
-        </Layout>,
-      );
+      return shallow(<Layout {...props} />);
     };
   });
   afterEach(() => {
@@ -24,7 +20,6 @@ describe('<Layout/>', () => {
   });
 
   it('renders without crashing', () => {
-    const wrapper = setup();
-    expect(wrapper.find('#test').length).toBe(1);
+    setup();
   });
 });
