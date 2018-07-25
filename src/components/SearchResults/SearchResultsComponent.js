@@ -308,7 +308,7 @@ export class SearchResultsComponent extends React.Component {
                         classes={classes}
                         key={key}
                         item={item}
-                        linkPath={'/moviedetail/tv'}
+                        linkPath={'/persondetail'}
                         imagePath={'https://image.tmdb.org/t/p/w300'}
                         personCard={true}
                       />
