@@ -14,6 +14,13 @@ describe('personal detail reducers', () => {
     toEqualStates({ type: undefined }, { ...defaultState });
   });
 
+  it('should handle FETCH_SEARCH_START', () => {
+    toEqualStates(
+      { type: types.FETCH_SEARCH_START },
+      { ...defaultState, isLoading: true },
+    );
+  });
+
   it('should handle FETCH_SEARCH_SUCCESS', () => {
     payload = {
       data: {

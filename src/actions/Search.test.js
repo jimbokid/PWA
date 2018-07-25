@@ -8,27 +8,11 @@ import {
   fetchResultsSearch,
   fetchByKeyword,
 } from './Search';
-import { fetchDetailPerson } from './PersonDetail';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 const error = new Error('Request failed with status code 404');
-
-class LocalStorageMock {
-  constructor() {
-    this.store = {};
-  }
-  clear() {
-    this.store = {};
-  }
-  getItem(key) {
-    return this.store[key] || null;
-  }
-  setItem(key, value) {
-    this.store[key] = value.toString();
-  }
-}
 
 describe('Search actions', () => {
   beforeEach(function() {
@@ -55,6 +39,9 @@ describe('Search actions', () => {
     });
 
     const expectedActions = [
+      {
+        type: types.FETCH_SEARCH_START,
+      },
       {
         payload: { data: { results: [{ name: 'name' }] }, inputSearch: 'name' },
         type: types.FETCH_SEARCH_SUCCESS,
@@ -85,6 +72,9 @@ describe('Search actions', () => {
 
     const expectedActions = [
       {
+        type: types.FETCH_SEARCH_START,
+      },
+      {
         payload: {
           error: error,
         },
@@ -110,6 +100,9 @@ describe('Search actions', () => {
 
     const expectedActions = [
       {
+        type: types.FETCH_SEARCH_START,
+      },
+      {
         payload: {
           error: error,
         },
@@ -134,6 +127,9 @@ describe('Search actions', () => {
     });
 
     const expectedActions = [
+      {
+        type: types.FETCH_SEARCH_START,
+      },
       {
         payload: {
           error: error,
@@ -163,6 +159,9 @@ describe('Search actions', () => {
     });
 
     const expectedActions = [
+      {
+        type: types.FETCH_SEARCH_START,
+      },
       {
         payload: {
           error: error,
@@ -207,6 +206,9 @@ describe('Search actions', () => {
     });
 
     const expectedActions = [
+      {
+        type: types.FETCH_SEARCH_START,
+      },
       {
         payload: {
           movie: { data: [] },
@@ -256,6 +258,9 @@ describe('Search actions', () => {
     });
 
     const expectedActions = [
+      {
+        type: types.FETCH_SEARCH_START,
+      },
       {
         payload: {
           genre: { '1': 'name' },
@@ -307,6 +312,9 @@ describe('Search actions', () => {
     });
 
     const expectedActions = [
+      {
+        type: types.FETCH_SEARCH_START,
+      },
       {
         payload: {
           genre: { '1': 'name' },

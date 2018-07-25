@@ -6,7 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const styles = theme => ({
   root: {
     position: 'relative',
-    height: '100%',
+    height: '100vh',
     width: '100%',
   },
   loaderContainer: {
@@ -15,7 +15,7 @@ const styles = theme => ({
     top: -theme.spacing.unit * 2,
     right: -theme.spacing.unit,
     bottom: 0,
-    backgroundColor: 'rgba(241,240,240,.5)',
+    backgroundColor: 'rgba(255,255,255,.5)',
     zIndex: 2,
   },
   loader: {
