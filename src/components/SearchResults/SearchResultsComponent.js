@@ -14,6 +14,7 @@ import CameraAlt from '@material-ui/icons/CameraAlt';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Chip from '@material-ui/core/Chip';
 import PropTypes from 'prop-types';
+import WithLoader from '../../shared/WithLoader';
 
 const styles = theme => ({
   card: {
@@ -205,6 +206,7 @@ export class SearchResultsComponent extends React.Component {
       fetchByKeyword,
       movie_results,
       genres,
+      isLoading,
     } = this.props;
     const { movie, tv, person } = this.props.data.searchResults;
 
@@ -226,91 +228,95 @@ export class SearchResultsComponent extends React.Component {
 
     return (
       <Layout>
-        {title.length > 0 && (
-          <Typography variant="title" gutterBottom>
-            {title}
-          </Typography>
-        )}
-        {movie &&
-          movie.results.length > 0 && (
-            <div id="movieWrapper">
-              {searchType === 'searchByGenre' ||
-              searchType === 'searchByKeyword' ? (
-                <InfiniteScroll
-                  dataLength={movie.results.length}
-                  next={() => {
-                    if (searchType === 'searchByGenre') {
-                      fetchByGenre(id);
-                    } else {
-                      fetchByKeyword(id);
-                    }
-                  }}
-                  hasMore={movie.results.length < movie_results}
-                >
+        <WithLoader isLoading={isLoading}>
+          {title.length > 0 && (
+            <Typography variant="title" gutterBottom>
+              {title}
+            </Typography>
+          )}
+          {movie &&
+            movie.results.length > 0 && (
+              <div id="movieWrapper">
+                {searchType === 'searchByGenre' ||
+                searchType === 'searchByKeyword' ? (
+                  <InfiniteScroll
+                    dataLength={movie.results.length}
+                    next={() => {
+                      if (searchType === 'searchByGenre') {
+                        fetchByGenre(id);
+                      } else {
+                        fetchByKeyword(id);
+                      }
+                    }}
+                    hasMore={movie.results.length < movie_results}
+                  >
+                    <MovieWrapper
+                      movie={movie}
+                      classes={classes}
+                      genres={genres}
+                    />
+                  </InfiniteScroll>
+                ) : (
                   <MovieWrapper
                     movie={movie}
                     classes={classes}
+                    id={'test'}
                     genres={genres}
                   />
-                </InfiniteScroll>
-              ) : (
-                <MovieWrapper
-                  movie={movie}
-                  classes={classes}
-                  id={'test'}
-                  genres={genres}
-                />
-              )}
-            </div>
-          )}
+                )}
+              </div>
+            )}
 
-        {tv &&
-          tv.results.length > 0 && (
-            <div id="tvWrapper">
-              <Typography variant="title" gutterBottom>
-                Tv show
-              </Typography>
-              {tv &&
-                tv.results.map((item, key) => {
-                  const date = moment(item.release_date).format('MMM Do YYYY');
-                  return (
-                    <CardWrapper
-                      classes={classes}
-                      key={key}
-                      item={item}
-                      date={date}
-                      linkPath={'/moviedetail/tv'}
-                      imagePath={
-                        'https://image.tmdb.org/t/p/w300_and_h450_bestv2'
-                      }
-                      personCard={false}
-                    />
-                  );
-                })}
-            </div>
-          )}
+          {tv &&
+            tv.results.length > 0 && (
+              <div id="tvWrapper">
+                <Typography variant="title" gutterBottom>
+                  Tv show
+                </Typography>
+                {tv &&
+                  tv.results.map((item, key) => {
+                    const date = moment(item.release_date).format(
+                      'MMM Do YYYY',
+                    );
+                    return (
+                      <CardWrapper
+                        classes={classes}
+                        key={key}
+                        item={item}
+                        date={date}
+                        linkPath={'/moviedetail/tv'}
+                        imagePath={
+                          'https://image.tmdb.org/t/p/w300_and_h450_bestv2'
+                        }
+                        personCard={false}
+                      />
+                    );
+                  })}
+              </div>
+            )}
 
-        {person &&
-          person.results.length > 0 && (
-            <div id="personWrapper">
-              <Typography variant="title" gutterBottom>
-                Person
-              </Typography>
-              {person &&
-                person.results.map((item, key) => {
-                  return (
-                    <CardWrapper
-                      classes={classes}
-                      key={key}
-                      item={item}
-                      linkPath={'/moviedetail/tv'}
-                      imagePath={'https://image.tmdb.org/t/p/w300'}
-                      personCard={true}
-                    />
-                  );
-                })}
-            </div>
-          )}
+          {person &&
+            person.results.length > 0 && (
+              <div id="personWrapper">
+                <Typography variant="title" gutterBottom>
+                  Person
+                </Typography>
+                {person &&
+                  person.results.map((item, key) => {
+                    return (
+                      <CardWrapper
+                        classes={classes}
+                        key={key}
+                        item={item}
+                        linkPath={'/moviedetail/tv'}
+                        imagePath={'https://image.tmdb.org/t/p/w300'}
+                        personCard={true}
+                      />
+                    );
+                  })}
+              </div>
+            )}
+        </WithLoader>
       </Layout>
     );
   }

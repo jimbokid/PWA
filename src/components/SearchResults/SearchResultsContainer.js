@@ -11,6 +11,7 @@ const mapStateToProps = ({ search }) => ({
   data: search,
   movie_results: search.movie_results,
   genres: search.genre,
+  isLoading: search.isLoading,
 });
 
 const mapDispatchToProps = dispatch => ({

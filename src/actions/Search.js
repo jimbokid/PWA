@@ -23,6 +23,10 @@ export const types = {
   FETCH_RESULT_SEARCH_SUCCESS: 'FETCH_RESULT_SEARCH_SUCCESS',
 };
 
+export const fetchSearchStart = () => ({
+  type: types.FETCH_SEARCH_START,
+});
+
 export const fetchSearchSuccess = (data, inputSearch) => ({
   type: types.FETCH_SEARCH_SUCCESS,
   payload: { data, inputSearch },
@@ -53,6 +57,7 @@ export const fetchSearch = name => dispatch => {
   if (name.length === 0) {
     return false;
   }
+  dispatch(fetchSearchStart());
   return axios
     .get(`${SEARCH}`, {
       params: {
@@ -90,6 +95,8 @@ export const fetchResultsSearch = name => dispatch => {
       },
     });
   });
+
+  dispatch(fetchSearchStart());
 
   return axios
     .all(promises)
@@ -134,6 +141,7 @@ export const fetchByGenre = id => (dispatch, getState) => {
       },
     });
   });
+  dispatch(fetchSearchStart());
 
   return axios
     .all(promises)
@@ -170,6 +178,7 @@ export const fetchByKeyword = keyword_id => (dispatch, getState) => {
       },
     });
   });
+  dispatch(fetchSearchStart());
 
   return axios
     .all(promises)

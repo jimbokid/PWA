@@ -13,6 +13,7 @@ export const defaultState = {
   movie_results: 0,
   movie_page: 1,
   error: null,
+  isLoading: false,
 };
 
 export default (state = defaultState, { type, payload }) => {
@@ -22,6 +23,7 @@ export default (state = defaultState, { type, payload }) => {
         ...state,
         data: payload.data,
         error: null,
+        isLoading: false,
       };
     }
     case types.CLEAR_SEATCH_RESSULTS: {
@@ -31,10 +33,19 @@ export default (state = defaultState, { type, payload }) => {
       };
     }
 
+    case types.FETCH_SEARCH_START: {
+      return {
+        ...state,
+        error: null,
+        isLoading: true,
+      };
+    }
+
     case types.FETCH_SEARCH_ERROR: {
       return {
         ...state,
         error: payload.error,
+        isLoading: false,
       };
     }
 
@@ -56,6 +67,7 @@ export default (state = defaultState, { type, payload }) => {
         movie_results: payload.movie.total_results,
         genre: payload.genre,
         error: null,
+        isLoading: false,
       };
     }
     default:
