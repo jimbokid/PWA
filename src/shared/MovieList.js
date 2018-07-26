@@ -44,7 +44,6 @@ const styles = theme => ({
   gridList: {
     width: '100%',
     flexWrap: 'nowrap',
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
   },
   vote: {
@@ -70,6 +69,15 @@ const styles = theme => ({
   },
 });
 
+export const generateListItem = (cast, item, type) => ({
+  title: cast ? item.name : item.title || item.original_name,
+  image: cast
+    ? `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.profile_path}`
+    : `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path}`,
+  subtitle: cast ? item.character : null,
+  link: cast ? `/persondetail/${item.id}` : `/moviedetail/${type}/${item.id}`,
+});
+
 export class MovieList extends React.Component {
   componentWillReceiveProps() {
     ReactDOM.findDOMNode(this).scrollLeft = 0;
@@ -89,20 +97,7 @@ export class MovieList extends React.Component {
         }}
       >
         {data.map((item, key) => {
-          const listItem = {
-            title: cast ? item.name : item.title || item.original_name,
-            image: cast
-              ? `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${
-                  item.profile_path
-                }`
-              : `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${
-                  item.poster_path
-                }`,
-            subtitle: cast ? item.character : null,
-            link: cast
-              ? `/persondetail/${item.id}`
-              : `/moviedetail/${type}/${item.id}`,
-          };
+          const listItem = generateListItem(cast, item, type);
 
           return (
             <GridListTile key={key} className={classes.cardInner}>
@@ -116,11 +111,11 @@ export class MovieList extends React.Component {
                         title={item.title}
                       />
                     ) : (
-                      <CameraAlt className={classes.icon} />
+                      <CameraAlt className={`${classes.icon} cameraAltIcon`} />
                     )}
 
                     {item.vote_average && (
-                      <Avatar className={classes.vote}>
+                      <Avatar className={`${classes.vote} avatarItem`}>
                         {item.vote_average}
                       </Avatar>
                     )}

@@ -10,7 +10,7 @@ install:
 - yarn install
 script:
 - yarn build
-- yarn test -- --coverage
+- yarn test --coverage
 after_script:
 - COVERALLS_REPO_TOKEN=$COVERALLS_TOKEN yarn coveralls
 deploy:
@@ -20,5 +20,5 @@ deploy:
     secure: $FIREBASE_TOKEN
   project: $FIREBASE_PROJECT_ID
 after_deploy:
-  message: "Deploy === Success"
+  message: 'Deploy === Success'
 

@@ -14,7 +14,7 @@ const styles = {
   },
 };
 
-const Header = ({ classes }) => {
+export const Header = ({ classes }) => {
   return (
     <AppBar position="static" color="default">
       <Toolbar>
