@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Clear from '@material-ui/icons/Clear';
 import moment from 'moment/moment';
@@ -13,6 +12,12 @@ const styles = theme => ({
   textField: {
     width: '100%',
     marginTop: 0,
+  },
+  clearBtn: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    zIndex: 1,
   },
   dropdownWrapper: {
     position: 'relative',
@@ -68,18 +73,17 @@ export class SearchField extends React.Component {
             onChange={this.handleChange()}
             margin="normal"
             autoComplete="section-blue"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  {this.state.movieName.length > 0 && (
-                    <IconButton onClick={this.clearSearch} id="clearBtn">
-                      <Clear />
-                    </IconButton>
-                  )}
-                </InputAdornment>
-              ),
-            }}
           />
+
+          {this.state.movieName.length > 0 && (
+            <IconButton
+              onClick={this.clearSearch}
+              id="clearBtn"
+              className={classes.clearBtn}
+            >
+              <Clear />
+            </IconButton>
+          )}
         </div>
         <div className={classes.dropdownWrapper}>
           <div className={classes.dropdownInner}>
