@@ -1,6 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { MovieDetailComponent } from './MovieDetailComponent';
+import { shallow, mount } from 'enzyme';
+import {
+  MovieDetailComponent,
+  Wrapper,
+  VideoWrapper,
+} from './MovieDetailComponent';
 
 const defaultProps = {
   data: {
@@ -12,6 +16,8 @@ const defaultProps = {
         name: 'action',
       },
     ],
+    backdrop_path: 'backdrop_path',
+    original_name: 'original_name',
   },
   classes: {},
   similar: {},
@@ -23,13 +29,14 @@ const defaultProps = {
     },
   },
   videos: {
-    results: [],
+    results: [{}],
   },
   genres: {},
   isLoading: false,
   error: null,
   fetchDetailMovie: jest.fn(),
   cleanDetailPage: jest.fn(),
+  handleVideo: jest.fn(),
   keywords: [],
 };
 
@@ -83,5 +90,32 @@ describe('<MovieDetailComponent/>', () => {
     });
 
     expect(wrapper.find('#errorWrapper').length).toBe(1);
+  });
+
+  it('test styled component', () => {
+    shallow(<Wrapper {...defaultProps} />);
+  });
+
+  it('should render videoWrapper', () => {
+    const innerProps = {
+      data: [{}],
+      classes: {},
+      handleVideo: jest.fn(),
+      openVideo: false,
+      showVideoClicked: false,
+    };
+    shallow(<VideoWrapper {...innerProps} />);
+  });
+
+  it('test styled component', () => {
+    const wrapper = shallow(<MovieDetailComponent {...defaultProps} />);
+    wrapper
+      .find('#parrentVideoWrapper')
+      .getElement()
+      .props.handleVideo();
+
+    const stateToExpect = { openVideo: true, showVideoClicked: true };
+
+    expect(wrapper.state()).toEqual(stateToExpect);
   });
 });
