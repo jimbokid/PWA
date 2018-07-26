@@ -35,4 +35,10 @@ describe('<PersonDetailComponent/>', () => {
     setup();
     expect(defaultProps.fetchDetailPerson).toHaveBeenCalledTimes(1);
   });
+
+  it('renders without crashing and call fetch', () => {
+    const wrapper = setup();
+    wrapper.unmount();
+    expect(defaultProps.cleanPersonPage).toHaveBeenCalledTimes(1);
+  });
 });
