@@ -246,6 +246,7 @@ export class MovieDetailComponent extends React.Component {
                 />
                 <TitleTextComponent title={'Overview:'} text={data.overview} />
                 <VideoWrapper
+                  classes={classes}
                   data={videos.results}
                   handleVideo={this.handleVideo.bind(this)}
                   openVideo={this.state.openVideo}
