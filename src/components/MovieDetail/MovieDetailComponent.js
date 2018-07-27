@@ -298,4 +298,12 @@ MovieDetailComponent.propTypes = {
   keywords: PropTypes.array.isRequired,
 };
 
+VideoWrapper.prototype = {
+  data: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  handleVideo: PropTypes.func.isRequired,
+  openVideo: PropTypes.bool.isRequired,
+  showVideoClicked: PropTypes.bool.isRequired,
+};
+
 export default withStyles(styles)(MovieDetailComponent);
