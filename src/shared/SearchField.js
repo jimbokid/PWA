@@ -27,7 +27,7 @@ const styles = theme => ({
     width: '100%',
     position: 'absolute',
     background: '#fff',
-    maxHeight: '100vh',
+    maxHeight: 'calc(100vh - 56px)',
     overflowY: 'scroll',
   },
   avatar: {
