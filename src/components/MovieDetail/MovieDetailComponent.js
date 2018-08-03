@@ -148,18 +148,25 @@ export const VideoWrapper = ({
 };
 
 export class MovieDetailComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      openVideo: false,
-      showVideoClicked: false,
-    };
-  }
+  state = {
+    openVideo: false,
+    showVideoClicked: false,
+    id: null,
+  };
 
-  componentWillMount() {
-    const { match, fetchDetailMovie } = this.props;
-    const { id, type } = match.params;
-    fetchDetailMovie(id, type);
+  static getDerivedStateFromProps(props, state) {
+    if (props.match.params.id !== state.id) {
+      const { fetchDetailMovie } = props;
+      const { id, type } = props.match.params;
+      fetchDetailMovie(id, type);
+      window.scrollTo(0, 0);
+      return {
+        openVideo: false,
+        showVideoClicked: false,
+        id: id,
+      };
+    }
+    return null;
   }
 
   componentWillUnmount() {
@@ -169,19 +176,6 @@ export class MovieDetailComponent extends React.Component {
       openVideo: false,
       showVideoClicked: false,
     });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.match.params.id !== this.props.match.params.id) {
-      const { fetchDetailMovie } = this.props;
-      const { id, type } = nextProps.match.params;
-      fetchDetailMovie(id, type);
-      window.scrollTo(0, 0);
-      this.setState({
-        openVideo: false,
-        showVideoClicked: false,
-      });
-    }
   }
 
   handleVideo() {

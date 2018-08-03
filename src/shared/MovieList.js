@@ -79,7 +79,7 @@ export const generateListItem = (cast, item, type) => ({
 });
 
 export class MovieList extends React.Component {
-  componentWillReceiveProps() {
+  componentDidUpdate() {
     ReactDOM.findDOMNode(this).scrollLeft = 0;
   }
 
