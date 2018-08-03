@@ -40,7 +40,7 @@ describe('<MovieList/>', () => {
   it('call function to set position of movie list', () => {
     const wrapper = mount(<MovieList {...defaultProps} />);
 
-    wrapper.instance().componentWillReceiveProps({
+    wrapper.setProps({
       data: [
         {
           title: 'title',

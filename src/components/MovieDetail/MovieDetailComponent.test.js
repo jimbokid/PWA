@@ -66,7 +66,7 @@ describe('<MovieDetailComponent/>', () => {
 
   it('have reFetch detail info on page', () => {
     const wrapper = setup();
-    wrapper.instance().componentWillReceiveProps({
+    wrapper.setProps({
       match: {
         params: {
           id: 2,
@@ -114,7 +114,7 @@ describe('<MovieDetailComponent/>', () => {
       .getElement()
       .props.handleVideo();
 
-    const stateToExpect = { openVideo: true, showVideoClicked: true };
+    const stateToExpect = { openVideo: true, showVideoClicked: true, id: 1 };
 
     expect(wrapper.state()).toEqual(stateToExpect);
   });
