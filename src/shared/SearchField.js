@@ -59,6 +59,12 @@ export class SearchField extends React.Component {
     fetchSearch(event.target.value);
   };
 
+  closeSearchBar = () => {
+    const { toggleSearch } = this.props;
+    this.clearSearch();
+    toggleSearch();
+  };
+
   clearSearch = () => {
     const { clearSearch } = this.props;
     this.setState({
@@ -98,6 +104,7 @@ export class SearchField extends React.Component {
               <Link
                 to={`/searchResults/searchByName/${this.state.movieName}/null`}
                 className={classes.item}
+                onClick={this.closeSearchBar}
               >
                 <MenuItem>Detail search for "{this.state.movieName}"</MenuItem>
               </Link>
@@ -113,6 +120,7 @@ export class SearchField extends React.Component {
                   }
                   key={key}
                   className={classes.item}
+                  onClick={this.closeSearchBar}
                 >
                   <MenuItem className={classes.menuItem}>
                     <Avatar className={classes.avatar}>

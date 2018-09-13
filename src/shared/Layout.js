@@ -56,7 +56,7 @@ export class Layout extends React.Component {
         <Header toggleSearch={this.toggleSearch} />
         {this.state.openSearch && (
           <div className={classes.searchWrapper}>
-            <SearchField />
+            <SearchField toggleSearch={this.toggleSearch}/>
           </div>
         )}
         <div className={classes.content}>
