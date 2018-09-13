@@ -22,4 +22,10 @@ describe('<Layout/>', () => {
   it('renders without crashing', () => {
     setup();
   });
+
+  it('should change state value', () => {
+    const wrapper = setup();
+    wrapper.instance().toggleSearch();
+    expect(wrapper.state().openSearch).toEqual(true);
+  });
 });

@@ -4,6 +4,7 @@ import { Header } from './Header';
 
 const defaultProps = {
   classes: {},
+  toggleSearch: jest.fn(),
 };
 
 let setup;
@@ -21,5 +22,11 @@ describe('<Header/>', () => {
 
   it('renders without crashing', () => {
     setup();
+  });
+
+  it('should call toggleSearch fn', () => {
+    const wrapper = setup();
+    wrapper.find('.searchBtn').simulate('click');
+    expect(defaultProps.toggleSearch).toHaveBeenCalledTimes(1);
   });
 });

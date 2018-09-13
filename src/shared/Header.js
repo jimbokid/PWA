@@ -29,7 +29,7 @@ export const Header = ({ classes, toggleSearch }) => {
             <img src={Logo} alt="" className={classes.logo} />
           </Link>
 
-          <IconButton onClick={toggleSearch} color="primary">
+          <IconButton onClick={toggleSearch} color="primary" className='searchBtn'>
             <Search />
           </IconButton>
         </Toolbar>
