@@ -4,7 +4,7 @@ import { SearchField, ClearBtn } from './SearchField';
 
 const defaultProps = {
   classes: {},
-  data: [
+  search: [
     {
       media_type: 'person',
       id: 1,

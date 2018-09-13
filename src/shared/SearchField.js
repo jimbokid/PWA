@@ -7,6 +7,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Clear from '@material-ui/icons/Clear';
 import moment from 'moment/moment';
 import Avatar from '@material-ui/core/Avatar';
+import { clearSearch, fetchSearch } from '../actions/Search';
+import { connect } from 'react-redux';
 
 const styles = theme => ({
   textField: {
@@ -25,7 +27,6 @@ const styles = theme => ({
   },
   dropdownInner: {
     width: '100%',
-    position: 'absolute',
     background: '#fff',
     maxHeight: 'calc(100vh - 56px)',
     overflowY: 'scroll',
@@ -36,6 +37,11 @@ const styles = theme => ({
   },
   item: {
     textDecoration: 'none',
+  },
+  menuItem: {
+    height: 'auto',
+    paddingLeft: 2,
+    paddingRight: 2,
   },
 });
 
@@ -61,7 +67,8 @@ export class SearchField extends React.Component {
     clearSearch();
   };
   render() {
-    const { classes, data } = this.props;
+    const { classes, search } = this.props;
+
     return (
       <React.Fragment>
         <div>
@@ -96,7 +103,7 @@ export class SearchField extends React.Component {
               </Link>
             )}
 
-            {data.map((item, key) => {
+            {search.map((item, key) => {
               return (
                 <Link
                   to={
@@ -107,7 +114,7 @@ export class SearchField extends React.Component {
                   key={key}
                   className={classes.item}
                 >
-                  <MenuItem>
+                  <MenuItem className={classes.menuItem}>
                     <Avatar className={classes.avatar}>
                       {item.media_type}
                     </Avatar>
@@ -128,4 +135,20 @@ export class SearchField extends React.Component {
   }
 }
 
-export default withStyles(styles)(SearchField);
+const mapStateToProps = ({ search }) => ({
+  search: search.data.results,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchSearch(name) {
+    dispatch(fetchSearch(name));
+  },
+  clearSearch() {
+    dispatch(clearSearch());
+  },
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withStyles(styles)(SearchField));

@@ -3,7 +3,6 @@ import Layout from '../../shared/Layout';
 import ErrorMessage from '../../shared/ErrorMessage';
 import { withStyles } from '@material-ui/core/styles';
 import MovieList from '../../shared/MovieList';
-import SearchField from '../../shared/SearchField';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import PropTypes from 'prop-types';
 
@@ -34,14 +33,7 @@ const styles = theme => ({
     bottom: 0,
     margin: 'auto',
     width: '100%',
-  },
-  searchWrapper: {
-    position: 'sticky',
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 1,
-    background: '#fff',
+
   },
 });
 
@@ -60,10 +52,7 @@ export class DashboardComponent extends React.Component {
     const {
       classes,
       popular,
-      fetchSearch,
       fetchPopularMovies,
-      search,
-      clearSearch,
       total_results,
       error,
     } = this.props;
@@ -75,13 +64,6 @@ export class DashboardComponent extends React.Component {
     return (
       <Layout>
         <div className={classes.cardLayout}>
-          <div className={classes.searchWrapper}>
-            <SearchField
-              fetchSearch={fetchSearch}
-              data={search}
-              clearSearch={clearSearch}
-            />
-          </div>
           <InfiniteScroll
             dataLength={popular.results.length}
             next={fetchPopularMovies}
