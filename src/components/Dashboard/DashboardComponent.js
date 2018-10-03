@@ -37,7 +37,7 @@ const styles = theme => ({
   },
 });
 
-export class DashboardComponent extends React.Component {
+export class DashboardComponent extends React.PureComponent {
   componentDidMount() {
     const { fetchPopularMovies } = this.props;
     fetchPopularMovies();

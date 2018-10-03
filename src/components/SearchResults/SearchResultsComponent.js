@@ -167,7 +167,7 @@ export const CardWrapper = props => {
   );
 };
 
-export class SearchResultsComponent extends React.Component {
+export class SearchResultsComponent extends React.PureComponent {
   componentWillMount() {
     const {
       match,

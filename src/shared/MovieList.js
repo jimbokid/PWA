@@ -78,7 +78,7 @@ export const generateListItem = (cast, item, type) => ({
   link: cast ? `/persondetail/${item.id}` : `/moviedetail/${type}/${item.id}`,
 });
 
-export class MovieList extends React.Component {
+export class MovieList extends React.PureComponent {
   componentDidUpdate() {
     ReactDOM.findDOMNode(this).scrollLeft = 0;
   }

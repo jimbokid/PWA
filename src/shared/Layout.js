@@ -36,7 +36,7 @@ const styles = theme => ({
   },
 });
 
-export class Layout extends React.Component {
+export class Layout extends React.PureComponent {
   state = {
     openSearch: false,
   };

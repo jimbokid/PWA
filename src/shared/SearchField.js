@@ -45,7 +45,7 @@ const styles = theme => ({
   },
 });
 
-export class SearchField extends React.Component {
+export class SearchField extends React.PureComponent {
   state = {
     movieName: '',
   };

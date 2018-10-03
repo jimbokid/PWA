@@ -147,7 +147,7 @@ export const VideoWrapper = ({
   );
 };
 
-export class MovieDetailComponent extends React.Component {
+export class MovieDetailComponent extends React.PureComponent {
   state = {
     openVideo: false,
     showVideoClicked: false,
