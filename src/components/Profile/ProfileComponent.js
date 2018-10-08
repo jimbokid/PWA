@@ -25,8 +25,12 @@ import Button from '@material-ui/core/Button';
 
 const uiConfig = {
   signInFlow: 'popup',
-  signInSuccessUrl: '/profile/',
-  signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+  signInSuccessUrl: '/',
+  signInOptions: [
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+  ],
 };
 
 export const ProfileComponent = () => (

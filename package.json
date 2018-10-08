@@ -9,6 +9,7 @@
     "babel-polyfill": "6.26.0",
     "enzyme-to-json": "3.3.3",
     "firebase": "^5.5.2",
+    "firebase-mock": "^2.2.10",
     "jest-cli": "^21.2.1",
     "moment": "^2.22.2",
     "moxios": "^0.4.0",
