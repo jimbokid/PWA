@@ -15,6 +15,12 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import YouTube from 'react-youtube';
+import Button from '@material-ui/core/Button';
+import { MyContext } from '../../shared/Auth';
+import {
+  addToFavorite,
+  removeFromFavorite,
+} from '../../utils/componentHelpers';
 
 const styles = theme => ({
   media: {
@@ -92,6 +98,10 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   panelWrapper: {
+    marginBottom: theme.spacing.unit,
+  },
+  button: {
+    marginTop: theme.spacing.unit,
     marginBottom: theme.spacing.unit,
   },
 });
@@ -184,6 +194,7 @@ export class MovieDetailComponent extends React.PureComponent {
       showVideoClicked: true,
     });
   }
+
   render() {
     const {
       data,
@@ -225,6 +236,54 @@ export class MovieDetailComponent extends React.PureComponent {
                   searchBy={'searchByKeyword'}
                   title={'Keywords'}
                 />
+
+                <MyContext.Consumer>
+                  {context => {
+                    if (
+                      context.state.userUid === null ||
+                      context.state.favorites === null ||
+                      type === 'movie'
+                    ) {
+                      return false;
+                    }
+                    const id = match.params.id;
+                    let isFavorite = false;
+                    let recordId = null;
+
+                    context.state.favorites.forEach(item => {
+                      if (item.id === parseInt(id, 0)) {
+                        isFavorite = true;
+                        recordId = item.recordId;
+                        return false;
+                      }
+                    });
+
+                    return (
+                      <React.Fragment>
+                        <Typography variant="title" gutterBottom>
+                          Add to favorite:
+                        </Typography>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          className={classes.button}
+                          onClick={() => {
+                            isFavorite
+                              ? removeFromFavorite(
+                                  context.state.userUid,
+                                  recordId,
+                                )
+                              : addToFavorite(context.state.userUid, data);
+                          }}
+                        >
+                          {isFavorite
+                            ? 'Remove from favorite'
+                            : 'Add to favorite'}
+                        </Button>
+                      </React.Fragment>
+                    );
+                  }}
+                </MyContext.Consumer>
                 <TitleTextComponent
                   title={'Vote average:'}
                   text={data.vote_average}
