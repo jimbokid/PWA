@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom';
 import {
   generateListItem,
   removeFromFavorite,
+  addUserInformation,
 } from '../../utils/componentHelpers';
 
 import Button from '@material-ui/core/Button';
@@ -31,6 +32,11 @@ const uiConfig = {
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     firebase.auth.EmailAuthProvider.PROVIDER_ID,
   ],
+  callbacks: {
+    signInSuccessWithAuthResult: authResult => {
+      addUserInformation(authResult.user.uid, authResult.additionalUserInfo);
+    },
+  },
 };
 
 export const ProfileComponent = () => (

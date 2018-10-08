@@ -22,6 +22,19 @@ export const addToFavorite = (userUid, data) => {
     });
 };
 
+export const addUserInformation = (userUid, data) => {
+  firebase
+    .database()
+    .ref(`Users/${userUid}/userInfo`)
+    .push(data)
+    .then(data => {
+      console.log('data ', data);
+    })
+    .catch(error => {
+      console.log('error ', error);
+    });
+};
+
 export const removeFromFavorite = (userUid, id) => {
   firebase
     .database()
