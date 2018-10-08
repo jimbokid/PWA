@@ -42,7 +42,7 @@ export const Header = ({ classes, toggleSearch }) => {
           aria-label="movie detail page"
           style={{ textDecoration: 'none' }}
         >
-          <IconButton color="primary" onClick={this.handleClick}>
+          <IconButton color="primary">
             <AccountCircle />
           </IconButton>
         </Link>
