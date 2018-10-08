@@ -7,12 +7,10 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Avatar from '@material-ui/core/Avatar';
 import indigo from '@material-ui/core/colors/indigo';
-import deepOrange from '@material-ui/core/colors/deepOrange';
 import CardMedia from '@material-ui/core/CardMedia';
 import CameraAlt from '@material-ui/icons/CameraAlt';
 import grey from '@material-ui/core/colors/grey';
 import LazyLoad from 'react-lazyload';
-import { generateListItem } from '../utils/componentHelpers';
 
 const styles = theme => ({
   cardInner: {
@@ -55,13 +53,6 @@ const styles = theme => ({
     fontSize: 13,
     backgroundColor: indigo[700],
   },
-  favorite: {
-    position: 'absolute',
-    top: theme.spacing.unit,
-    left: theme.spacing.unit,
-    fontSize: 13,
-    backgroundColor: deepOrange[700],
-  },
   cover: {
     display: 'flex',
     alignItems: 'center',
@@ -76,6 +67,15 @@ const styles = theme => ({
     bottom: 0,
     margin: 'auto',
   },
+});
+
+export const generateListItem = (cast, item, type) => ({
+  title: cast ? item.name : item.title || item.original_name,
+  image: cast
+    ? `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.profile_path}`
+    : `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path}`,
+  subtitle: cast ? item.character : null,
+  link: cast ? `/persondetail/${item.id}` : `/moviedetail/${type}/${item.id}`,
 });
 
 export class MovieList extends React.PureComponent {

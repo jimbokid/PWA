@@ -194,7 +194,6 @@ export class MovieDetailComponent extends React.PureComponent {
       showVideoClicked: true,
     });
   }
-
   render() {
     const {
       data,
@@ -242,7 +241,7 @@ export class MovieDetailComponent extends React.PureComponent {
                     if (
                       context.state.userUid === null ||
                       context.state.favorites === null ||
-                      type === 'movie'
+                      type !== 'movie'
                     ) {
                       return false;
                     }
