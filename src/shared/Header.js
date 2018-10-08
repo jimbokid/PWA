@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 
 import Search from '@material-ui/icons/Search';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const styles = {
   logo: {
@@ -22,19 +23,31 @@ const styles = {
 
 export const Header = ({ classes, toggleSearch }) => {
   return (
-    <React.Fragment>
-      <AppBar position="static" color="default">
-        <Toolbar className={classes.toolbar}>
-          <Link to={`/`} aria-label="home">
-            <img src={Logo} alt="" className={classes.logo} />
-          </Link>
+    <AppBar position="static" color="default">
+      <Toolbar className={classes.toolbar}>
+        <Link to={`/`} aria-label="home">
+          <img src={Logo} alt="" className={classes.logo} />
+        </Link>
 
-          <IconButton onClick={toggleSearch} color="primary" className='searchBtn'>
-            <Search />
+        <IconButton
+          onClick={toggleSearch}
+          color="primary"
+          className="searchBtn"
+        >
+          <Search />
+        </IconButton>
+
+        <Link
+          to={'/profile/'}
+          aria-label="movie detail page"
+          style={{ textDecoration: 'none' }}
+        >
+          <IconButton color="primary">
+            <AccountCircle />
           </IconButton>
-        </Toolbar>
-      </AppBar>
-    </React.Fragment>
+        </Link>
+      </Toolbar>
+    </AppBar>
   );
 };
 
