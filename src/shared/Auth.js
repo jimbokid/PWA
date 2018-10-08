@@ -17,7 +17,7 @@ export class Auth extends React.PureComponent {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({
         isSignedIn: !!user,
-        userUid: user.uid
+        userUid: user ? !!user.uid : null,
       });
 
       if (user) {
