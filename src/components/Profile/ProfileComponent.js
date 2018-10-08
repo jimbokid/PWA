@@ -104,14 +104,7 @@ export const ProfileComponent = () => (
 
               <Button
                 variant="contained"
-                onClick={() =>
-                  firebase
-                    .auth()
-                    .signOut()
-                    .then(() => {
-                      window.location.reload();
-                    })
-                }
+                onClick={() => firebase.auth().signOut()}
               >
                 Sign-out
               </Button>
