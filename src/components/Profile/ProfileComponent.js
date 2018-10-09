@@ -13,6 +13,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
+import Divider from '@material-ui/core/Divider';
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Link } from 'react-router-dom';
@@ -21,6 +22,8 @@ import {
   removeFromFavorite,
   addUserInformation,
 } from '../../utils/componentHelpers';
+
+import WithLoader from '../../shared/WithLoader';
 
 import Button from '@material-ui/core/Button';
 
@@ -44,6 +47,8 @@ export const ProfileComponent = () => (
     <MyContext.Consumer>
       {context => (
         <React.Fragment>
+          {context.state.isSignedIn === null && <WithLoader isLoading={true} />}
+
           {!context.state.isSignedIn ? (
             <StyledFirebaseAuth
               uiConfig={uiConfig}
@@ -96,6 +101,7 @@ export const ProfileComponent = () => (
                             </IconButton>
                           </ListItemSecondaryAction>
                         </ListItem>
+                        <Divider/>
                       </Link>
                     );
                   })}

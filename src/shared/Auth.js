@@ -9,7 +9,7 @@ export const MyContext = React.createContext();
 export class Auth extends React.PureComponent {
   state = {
     userUid: null,
-    isSignedIn: false,
+    isSignedIn: null,
     favorites: null,
   };
 

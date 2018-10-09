@@ -21,6 +21,7 @@ import {
   addToFavorite,
   removeFromFavorite,
 } from '../../utils/componentHelpers';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   media: {
@@ -236,15 +237,41 @@ export class MovieDetailComponent extends React.PureComponent {
                   title={'Keywords'}
                 />
 
+                <Typography variant="title" gutterBottom>
+                  Add to favorite:
+                </Typography>
+
                 <MyContext.Consumer>
                   {context => {
+                    if (context.state.isSignedIn === false) {
+                      return (
+                        <React.Fragment>
+                          <Typography gutterBottom>
+                            You need to be authorized
+                          </Typography>
+                          <Link
+                            to={`/profile/`}
+                            style={{ textDecoration: 'none' }}
+                          >
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              className={classes.button}
+                            >
+                              Login
+                            </Button>
+                          </Link>
+                        </React.Fragment>
+                      );
+                    }
                     if (
-                      context.state.userUid === null ||
+                      context.state.isSignedIn === null ||
                       context.state.favorites === null ||
                       type !== 'movie'
                     ) {
                       return false;
                     }
+
                     const id = match.params.id;
                     let isFavorite = false;
                     let recordId = null;
@@ -256,12 +283,8 @@ export class MovieDetailComponent extends React.PureComponent {
                         return false;
                       }
                     });
-
                     return (
                       <React.Fragment>
-                        <Typography variant="title" gutterBottom>
-                          Add to favorite:
-                        </Typography>
                         <Button
                           variant="contained"
                           color="primary"
