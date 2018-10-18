@@ -101,7 +101,7 @@ export class MovieList extends React.PureComponent {
 
           return (
             <GridListTile key={key} className={classes.cardInner}>
-              <LazyLoad height={400} offset={100}>
+              <LazyLoad height={300} offset={100}>
                 <Link to={listItem.link} aria-label="movie detail page">
                   <div className={classes.media}>
                     {item.profile_path !== null ? (
