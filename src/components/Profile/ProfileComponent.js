@@ -72,6 +72,7 @@ export const ProfileComponent = () => (
                         aria-label="movie detail page"
                         key={key}
                         style={{ textDecoration: 'none' }}
+                        className="favoriteListItem"
                       >
                         <ListItem>
                           <ListItemAvatar>

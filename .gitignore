@@ -5,6 +5,7 @@ build
 firebase-debug.log
 yarn.lock
 package-lock.json
+.env
 
 # dependencies
 /node_modules
