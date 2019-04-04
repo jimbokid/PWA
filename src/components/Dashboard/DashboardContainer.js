@@ -1,26 +1,25 @@
 import DashboardComponent from './DashboardComponent';
-import { connect } from 'react-redux';
-import { fetchPopularMovies } from '../../actions/Dashboard';
-import { fetchSearch, clearSearch } from '../../actions/Search';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {fetchPopularMovies} from '../../actions/Dashboard';
+import {fetchSearch, clearSearch} from '../../actions/Search';
 
-const mapStateToProps = ({ dashboard, search }) => ({
+const mapStateToProps = ({dashboard, search}) => ({
   popular: dashboard.popular,
   search: search.data.results,
   total_results: dashboard.total_results,
   error: dashboard.error,
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchPopularMovies() {
-    dispatch(fetchPopularMovies());
-  },
-  fetchSearch(name) {
-    dispatch(fetchSearch(name));
-  },
-  clearSearch() {
-    dispatch(clearSearch());
-  },
-});
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+      fetchPopularMovies,
+      fetchSearch,
+      clearSearch,
+    },
+    dispatch
+  )
+}
 
 export default connect(
   mapStateToProps,

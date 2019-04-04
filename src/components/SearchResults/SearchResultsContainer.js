@@ -1,4 +1,5 @@
 import SearchResultsComponent from './SearchResultsComponent';
+import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 import {
   fetchResultsSearch,
@@ -14,20 +15,16 @@ const mapStateToProps = ({ search }) => ({
   isLoading: search.isLoading,
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchResultsSearch(name) {
-    dispatch(fetchResultsSearch(name));
-  },
-  fetchByGenre(id) {
-    dispatch(fetchByGenre(id));
-  },
-  fetchByKeyword(keyword) {
-    dispatch(fetchByKeyword(keyword));
-  },
-  clearSearch() {
-    dispatch(clearSearch());
-  },
-});
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+      fetchResultsSearch,
+      fetchByGenre,
+      fetchByKeyword,
+      clearSearch
+    },
+    dispatch
+  )
+}
 
 export default connect(
   mapStateToProps,

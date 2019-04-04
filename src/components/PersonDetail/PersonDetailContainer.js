@@ -1,4 +1,5 @@
 import PersonDetailComponent from './PersonDetailComponent';
+import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 import { fetchDetailPerson, cleanPersonPage } from '../../actions/PersonDetail';
 
@@ -8,14 +9,14 @@ const mapStateToProps = ({ persondetail }) => ({
   isLoading: persondetail.isLoading,
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchDetailPerson(id) {
-    dispatch(fetchDetailPerson(id));
-  },
-  cleanPersonPage() {
-    dispatch(cleanPersonPage());
-  },
-});
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+      fetchDetailPerson,
+      cleanPersonPage,
+    },
+    dispatch
+  )
+}
 
 export default connect(
   mapStateToProps,
