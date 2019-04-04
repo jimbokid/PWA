@@ -1,8 +1,9 @@
 import MovieDetailComponent from './MovieDetailComponent';
-import { connect } from 'react-redux';
-import { fetchDetailMovie, cleanDetailPage } from '../../actions/MovieDetail';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {fetchDetailMovie, cleanDetailPage} from '../../actions/MovieDetail';
 
-const mapStateToProps = ({ moviedetail }) => ({
+const mapStateToProps = ({moviedetail}) => ({
   data: moviedetail.data,
   similar: moviedetail.similar,
   genres: moviedetail.genres,
@@ -13,14 +14,14 @@ const mapStateToProps = ({ moviedetail }) => ({
   keywords: moviedetail.keywords,
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchDetailMovie(id, type) {
-    dispatch(fetchDetailMovie(id, type));
-  },
-  cleanDetailPage() {
-    dispatch(cleanDetailPage());
-  },
-});
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+      fetchDetailMovie,
+      cleanDetailPage,
+    },
+    dispatch
+  )
+}
 
 export default connect(
   mapStateToProps,
