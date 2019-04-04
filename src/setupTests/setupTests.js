@@ -9,3 +9,6 @@ configure({ adapter: new Adapter() });
 console.error = message => {
   throw new Error(message);
 };
+window.alert = (msg) => { console.log(msg); };
+window.matchMedia = () => ({});
+window.scrollTo = () => { };
