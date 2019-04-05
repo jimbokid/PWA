@@ -142,8 +142,8 @@ MovieList.propTypes = {
   classes: PropTypes.object,
   inline: PropTypes.bool,
   type: PropTypes.string,
-  cast: PropTypes.array,
-  cols: PropTypes.bool
+  cast: PropTypes.bool,
+  cols: PropTypes.number
 };
 
 export default withStyles(styles)(MovieList);

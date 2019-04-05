@@ -162,7 +162,7 @@ const mapDispatchToProps = dispatch => ({
 
 SearchField.propTypes = {
   classes: PropTypes.object,
-  search: PropTypes.string,
+  search: PropTypes.any,
   clearSearch: PropTypes.func,
   toggleSearch: PropTypes.func,
   fetchSearch: PropTypes.func

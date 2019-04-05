@@ -46,7 +46,7 @@ export const GenreList = ({ data, genres, classes, searchBy, title }) => {
 
 GenreList.propTypes = {
   data: PropTypes.array,
-  genres: PropTypes.array,
+  genres: PropTypes.object,
   classes: PropTypes.object,
   searchBy: PropTypes.string,
   title: PropTypes.string

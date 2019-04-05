@@ -323,12 +323,16 @@ export class SearchResultsComponent extends React.PureComponent {
 }
 
 SearchResultsComponent.propTypes = {
-  classes: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
-  fetchByGenre: PropTypes.func.isRequired,
-  fetchByKeyword: PropTypes.func.isRequired,
-  movie_results: PropTypes.number.isRequired,
-  genres: PropTypes.object.isRequired,
+  data: PropTypes.object,
+  classes: PropTypes.object,
+  match: PropTypes.object,
+  fetchByGenre: PropTypes.func,
+  fetchByKeyword: PropTypes.func,
+  fetchResultsSearch: PropTypes.func,
+  clearSearch: PropTypes.func,
+  movie_results: PropTypes.any,
+  genres: PropTypes.object,
+  isLoading: PropTypes.bool
 };
 
 CardWrapper.propTypes = {
@@ -345,21 +349,8 @@ MovieWrapper.propTypes = {
   match: PropTypes.object,
   fetchByGenre: PropTypes.func,
   fetchByKeyword: PropTypes.func,
-  movie: PropTypes.array,
-  genres: PropTypes.array,
-  isLoading: PropTypes.bool
-};
-
-SearchResultsComponent.propTypes = {
-  data: PropTypes.object,
-  classes: PropTypes.object,
-  match: PropTypes.object,
-  fetchByGenre: PropTypes.func,
-  fetchByKeyword: PropTypes.func,
-  fetchResultsSearch: PropTypes.func,
-  clearSearch: PropTypes.func,
-  movie_results: PropTypes.array,
-  genres: PropTypes.array,
+  movie: PropTypes.object,
+  genres: PropTypes.object,
   isLoading: PropTypes.bool
 };
 

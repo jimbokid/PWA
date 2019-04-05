@@ -28,7 +28,7 @@ const TitleTextComponent = ({ title, text, classes }) => {
 
 TitleTextComponent.propTypes = {
   title: PropTypes.string,
-  text: PropTypes.string,
+  text: PropTypes.any,
   classes: PropTypes.object
 };
 

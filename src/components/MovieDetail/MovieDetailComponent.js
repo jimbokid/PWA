@@ -375,7 +375,7 @@ MovieDetailComponent.propTypes = {
 };
 
 VideoWrapper.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
   classes: PropTypes.object.isRequired,
   handleVideo: PropTypes.func.isRequired,
   openVideo: PropTypes.bool.isRequired,
