@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
@@ -23,6 +24,12 @@ const TitleTextComponent = ({ title, text, classes }) => {
       )}
     </React.Fragment>
   );
+};
+
+TitleTextComponent.propTypes = {
+  title: PropTypes.string,
+  text: PropTypes.string,
+  classes: PropTypes.object
 };
 
 export default withStyles(styles)(TitleTextComponent);

@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../../shared/Layout';
 import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import WithLoader from '../../shared/WithLoader';
 import Avatar from '@material-ui/core/Avatar';
 import MovieList from '../../shared/MovieList';
@@ -24,16 +24,18 @@ const styles = {
 
 export class PersonDetailComponent extends React.PureComponent {
   componentWillMount() {
-    const { match, fetchDetailPerson } = this.props;
-    const { id } = match.params;
+    const {match, fetchDetailPerson} = this.props;
+    const {id} = match.params;
     fetchDetailPerson(id);
   }
+
   componentWillUnmount() {
-    const { cleanPersonPage } = this.props;
+    const {cleanPersonPage} = this.props;
     cleanPersonPage();
   }
+
   render() {
-    const { data, classes, isLoading, movies } = this.props;
+    const {data, classes, isLoading, movies} = this.props;
 
     return (
       <Layout>
@@ -57,14 +59,14 @@ export class PersonDetailComponent extends React.PureComponent {
             text={data.place_of_birth}
           />
 
-          <TitleTextComponent title={'Biography:'} text={data.biography} />
+          <TitleTextComponent title={'Biography:'} text={data.biography}/>
 
           <Typography variant="title" gutterBottom>
             Filmography:
           </Typography>
 
           {movies && (
-            <MovieList data={movies} inline={true} type={'movie'} cols={2.2} />
+            <MovieList data={movies} inline={true} type={'movie'} cols={2.2}/>
           )}
         </WithLoader>
       </Layout>
@@ -77,6 +79,9 @@ PersonDetailComponent.propTypes = {
   classes: PropTypes.object.isRequired,
   isLoading: PropTypes.bool.isRequired,
   movies: PropTypes.array.isRequired,
+  match: PropTypes.object,
+  fetchDetailPerson: PropTypes.func,
+  cleanPersonPage: PropTypes.func
 };
 
 export default withStyles(styles)(PersonDetailComponent);

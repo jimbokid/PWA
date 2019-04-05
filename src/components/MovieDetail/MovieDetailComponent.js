@@ -371,9 +371,10 @@ MovieDetailComponent.propTypes = {
   error: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   videos: PropTypes.object.isRequired,
   keywords: PropTypes.array.isRequired,
+  cleanDetailPage: PropTypes.func
 };
 
-VideoWrapper.prototype = {
+VideoWrapper.propTypes = {
   data: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   handleVideo: PropTypes.func.isRequired,

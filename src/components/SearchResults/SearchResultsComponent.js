@@ -339,4 +339,28 @@ CardWrapper.propTypes = {
   item: PropTypes.object.isRequired,
 };
 
+MovieWrapper.propTypes = {
+  data: PropTypes.object,
+  classes: PropTypes.object,
+  match: PropTypes.object,
+  fetchByGenre: PropTypes.func,
+  fetchByKeyword: PropTypes.func,
+  movie: PropTypes.array,
+  genres: PropTypes.array,
+  isLoading: PropTypes.bool
+};
+
+SearchResultsComponent.propTypes = {
+  data: PropTypes.object,
+  classes: PropTypes.object,
+  match: PropTypes.object,
+  fetchByGenre: PropTypes.func,
+  fetchByKeyword: PropTypes.func,
+  fetchResultsSearch: PropTypes.func,
+  clearSearch: PropTypes.func,
+  movie_results: PropTypes.array,
+  genres: PropTypes.array,
+  isLoading: PropTypes.bool
+};
+
 export default withStyles(styles)(SearchResultsComponent);

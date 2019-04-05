@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
+import {Link} from 'react-router-dom';
+import {withStyles} from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -80,18 +81,19 @@ export const generateListItem = (cast, item, type) => ({
 
 export class MovieList extends React.PureComponent {
   componentDidUpdate() {
+    /* eslint-disable*/
     ReactDOM.findDOMNode(this).scrollLeft = 0;
+    /* eslint-enable*/
   }
 
   render() {
-    const { data, classes, inline, type, cast, cols } = this.props;
+    const {data, classes, inline, type, cast, cols} = this.props;
 
     return (
       <GridList
         className={inline ? classes.gridList : classes.cardLayout}
         cols={cols}
         cellHeight={'auto'}
-        ref="GridList"
         style={{
           margin: 0,
         }}
@@ -111,7 +113,7 @@ export class MovieList extends React.PureComponent {
                         title={item.title}
                       />
                     ) : (
-                      <CameraAlt className={`${classes.icon} cameraAltIcon`} />
+                      <CameraAlt className={`${classes.icon} cameraAltIcon`}/>
                     )}
 
                     {item.vote_average && (
@@ -134,5 +136,14 @@ export class MovieList extends React.PureComponent {
     );
   }
 }
+
+MovieList.propTypes = {
+  data: PropTypes.array,
+  classes: PropTypes.object,
+  inline: PropTypes.bool,
+  type: PropTypes.string,
+  cast: PropTypes.array,
+  cols: PropTypes.bool
+};
 
 export default withStyles(styles)(MovieList);

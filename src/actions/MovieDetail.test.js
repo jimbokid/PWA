@@ -8,21 +8,6 @@ const mockStore = configureMockStore(middlewares);
 
 const error = new Error('Request failed with status code 404');
 
-class LocalStorageMock {
-  constructor() {
-    this.store = {};
-  }
-  clear() {
-    this.store = {};
-  }
-  getItem(key) {
-    return this.store[key] || null;
-  }
-  setItem(key, value) {
-    this.store[key] = value.toString();
-  }
-}
-
 describe('Dashboard actions', () => {
   beforeEach(function() {
     moxios.install();

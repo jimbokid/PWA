@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import firebase from 'firebase';
 
 export const generateListItem = (cast, item, type) => ({

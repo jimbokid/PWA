@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import firebase from 'firebase';
 import { firebaseConfig } from '../constants/firebase';
 
@@ -53,5 +54,9 @@ export class Auth extends React.PureComponent {
     );
   }
 }
+
+Auth.propTypes = {
+  children: PropTypes.object
+};
 
 export default Auth;

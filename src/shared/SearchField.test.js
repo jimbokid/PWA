@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SearchField, ClearBtn } from './SearchField';
+import { SearchField } from './SearchField';
 
 const defaultProps = {
   classes: {},

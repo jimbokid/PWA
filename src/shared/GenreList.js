@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import Chip from '@material-ui/core/Chip';
@@ -41,6 +42,14 @@ export const GenreList = ({ data, genres, classes, searchBy, title }) => {
         })}
     </div>
   );
+};
+
+GenreList.propTypes = {
+  data: PropTypes.array,
+  genres: PropTypes.array,
+  classes: PropTypes.object,
+  searchBy: PropTypes.string,
+  title: PropTypes.string
 };
 
 export default withStyles(styles)(GenreList);

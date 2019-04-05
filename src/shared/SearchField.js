@@ -1,14 +1,15 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import Clear from '@material-ui/icons/Clear';
 import moment from 'moment/moment';
 import Avatar from '@material-ui/core/Avatar';
-import { clearSearch, fetchSearch } from '../actions/Search';
-import { connect } from 'react-redux';
+import {clearSearch, fetchSearch} from '../actions/Search';
+import {connect} from 'react-redux';
 
 const styles = theme => ({
   textField: {
@@ -51,7 +52,7 @@ export class SearchField extends React.PureComponent {
   };
 
   handleChange = () => event => {
-    const { fetchSearch } = this.props;
+    const {fetchSearch} = this.props;
     this.setState({
       movieName: event.target.value,
     });
@@ -60,20 +61,21 @@ export class SearchField extends React.PureComponent {
   };
 
   closeSearchBar = () => {
-    const { toggleSearch } = this.props;
+    const {toggleSearch} = this.props;
     this.clearSearch();
     toggleSearch();
   };
 
   clearSearch = () => {
-    const { clearSearch } = this.props;
+    const {clearSearch} = this.props;
     this.setState({
       movieName: '',
     });
     clearSearch();
   };
+
   render() {
-    const { classes, search } = this.props;
+    const {classes, search} = this.props;
 
     return (
       <React.Fragment>
@@ -94,7 +96,7 @@ export class SearchField extends React.PureComponent {
               id="clearBtn"
               className={classes.clearBtn}
             >
-              <Clear />
+              <Clear/>
             </IconButton>
           )}
         </div>
@@ -106,7 +108,9 @@ export class SearchField extends React.PureComponent {
                 className={classes.item}
                 onClick={this.closeSearchBar}
               >
-                <MenuItem>Detail search for "{this.state.movieName}"</MenuItem>
+                <MenuItem>
+                  Detail search for &quot;{this.state.movieName}&quot;
+                </MenuItem>
               </Link>
             )}
 
@@ -129,8 +133,8 @@ export class SearchField extends React.PureComponent {
                     {item.name ? item.name : item.original_title}
                     <span>
                       ({moment(item.release_date || item.first_air_date).format(
-                        'MMM Do YYYY',
-                      )})
+                      'MMM Do YYYY',
+                    )})
                     </span>
                   </MenuItem>
                 </Link>
@@ -143,7 +147,7 @@ export class SearchField extends React.PureComponent {
   }
 }
 
-const mapStateToProps = ({ search }) => ({
+const mapStateToProps = ({search}) => ({
   search: search.data.results,
 });
 
@@ -155,6 +159,14 @@ const mapDispatchToProps = dispatch => ({
     dispatch(clearSearch());
   },
 });
+
+SearchField.propTypes = {
+  classes: PropTypes.object,
+  search: PropTypes.string,
+  clearSearch: PropTypes.func,
+  toggleSearch: PropTypes.func,
+  fetchSearch: PropTypes.func
+};
 
 export default connect(
   mapStateToProps,
