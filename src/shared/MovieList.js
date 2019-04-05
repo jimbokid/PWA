@@ -81,7 +81,9 @@ export const generateListItem = (cast, item, type) => ({
 
 export class MovieList extends React.PureComponent {
   componentDidUpdate() {
+    /* eslint-disable*/
     ReactDOM.findDOMNode(this).scrollLeft = 0;
+    /* eslint-enable*/
   }
 
   render() {
