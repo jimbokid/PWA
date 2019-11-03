@@ -79,21 +79,21 @@ const styles = theme => ({
   infoWrapper: {
     paddingTop: theme.spacing.unit,
   },
+  youTubeWrapper: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    margin: 'auto',
+    width: '100%',
+  },
   videoInner: {
     height: 0,
     paddingTop: '56%',
     position: 'relative',
     width: '100%',
     marginBottom: theme.spacing.unit,
-    '& span': {
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      left: 0,
-      bottom: 0,
-      margin: 'auto',
-      width: '100%',
-    },
   },
   videoWrapper: {
     flexWrap: 'wrap',
@@ -142,6 +142,7 @@ export const VideoWrapper = ({
               {(openVideo || showVideoClicked) && (
                 <div className={classes.videoInner}>
                   <YouTube
+                    className={classes.youTubeWrapper}
                     videoId={item.key}
                     opts={{
                       width: '100%',
