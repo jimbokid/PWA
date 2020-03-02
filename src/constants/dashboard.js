@@ -7,3 +7,4 @@ export const SEARCH_MOVIE = `${API_PATH}search/movie`;
 export const SEARCH_TV = `${API_PATH}search/tv`;
 export const SEARCH_PERSON = `${API_PATH}search/person`;
 
+export const IMAGE_URL = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2/';

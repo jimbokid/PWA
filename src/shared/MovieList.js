@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import {Link} from 'react-router-dom';
 import {withStyles} from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Avatar from '@material-ui/core/Avatar';
 import indigo from '@material-ui/core/colors/indigo';
@@ -12,6 +10,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CameraAlt from '@material-ui/icons/CameraAlt';
 import grey from '@material-ui/core/colors/grey';
 import LazyLoad from 'react-lazyload';
+import {IMAGE_URL} from "../constants/dashboard";
+import GridWrapperHOC from "./GridWrapperHOC";
+import GridItemHOC from "./GridItemHOC";
 
 const styles = theme => ({
   cardInner: {
@@ -25,6 +26,7 @@ const styles = theme => ({
     height: 0,
     paddingTop: '150%',
     background: '#949494',
+    position: 'relative',
   },
   cardLayout: {
     display: 'flex',
@@ -72,9 +74,7 @@ const styles = theme => ({
 
 export const generateListItem = (cast, item, type) => ({
   title: cast ? item.name : item.title || item.original_name,
-  image: cast
-    ? `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.profile_path}`
-    : `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path}`,
+  image: `${IMAGE_URL}${cast ? item.profile_path : item.poster_path}`,
   subtitle: cast ? item.character : null,
   link: cast ? `/persondetail/${item.id}` : `/moviedetail/${type}/${item.id}`,
 });
@@ -90,19 +90,13 @@ export class MovieList extends React.PureComponent {
     const {data, classes, inline, type, cast, cols} = this.props;
 
     return (
-      <GridList
-        className={inline ? classes.gridList : classes.cardLayout}
-        cols={cols}
-        cellHeight={'auto'}
-        style={{
-          margin: 0,
-        }}
-      >
+
+      <GridWrapperHOC inline={inline} cols={cols}>
         {data.map((item, key) => {
           const listItem = generateListItem(cast, item, type);
 
           return (
-            <GridListTile key={key} className={classes.cardInner}>
+            <GridItemHOC key={key} inline={inline}>
               <LazyLoad height={300} offset={100}>
                 <Link to={listItem.link} aria-label="movie detail page">
                   <div className={classes.media}>
@@ -129,10 +123,10 @@ export class MovieList extends React.PureComponent {
                   </div>
                 </Link>
               </LazyLoad>
-            </GridListTile>
+            </GridItemHOC>
           );
         })}
-      </GridList>
+      </GridWrapperHOC>
     );
   }
 }
