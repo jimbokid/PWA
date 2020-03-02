@@ -118,18 +118,4 @@ describe('<MovieList/>', () => {
       title: 'original_name',
     });
   });
-
-  it('should get correct classname for inline list - cardLayout', () => {
-    const wrapper = setup();
-
-    expect(wrapper.props().className).toBe('cardLayout');
-  });
-
-  it('should get correct classname for inline list - gridList', () => {
-    const wrapper = setup({
-      inline: true,
-    });
-
-    expect(wrapper.props().className).toBe('gridList');
-  });
 });

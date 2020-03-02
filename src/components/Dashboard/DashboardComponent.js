@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Layout from '../../shared/Layout';
 import ErrorMessage from '../../shared/ErrorMessage';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import MovieList from '../../shared/MovieList';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import PropTypes from 'prop-types';
@@ -39,12 +39,12 @@ const styles = theme => ({
 
 export class DashboardComponent extends React.PureComponent {
   componentDidMount() {
-    const { fetchPopularMovies } = this.props;
+    const {fetchPopularMovies} = this.props;
     fetchPopularMovies();
   }
 
   componentWillUnmount() {
-    const { clearSearch } = this.props;
+    const {clearSearch} = this.props;
     clearSearch();
   }
 
@@ -58,7 +58,7 @@ export class DashboardComponent extends React.PureComponent {
     } = this.props;
 
     if (error) {
-      return <ErrorMessage error={error} id={'errorWrapper'} />;
+      return <ErrorMessage error={error} id={'errorWrapper'}/>;
     }
 
     return (
@@ -69,7 +69,7 @@ export class DashboardComponent extends React.PureComponent {
             next={fetchPopularMovies}
             hasMore={popular.results.length < total_results}
           >
-            <MovieList data={popular.results} inline={false} type={'movie'} />
+            <MovieList data={popular.results} inline={false} type={'movie'} cols={4}/>
           </InfiniteScroll>
         </div>
       </Layout>
