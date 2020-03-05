@@ -2,32 +2,29 @@ language: node_js
 node_js: lts/*
 sudo: false
 before_install:
-- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
-- export PATH=$HOME/.yarn/bin:$PATH
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.19.0
+  - export PATH=$HOME/.yarn/bin:$PATH
 env:
   global:
-  - REACT_APP_API_KEY=$FIREBASE_API_KEY
-  - REACT_APP_AUTH_DOMAIN=$FIREBASE_AUTH_DOMAIN
-  - REACT_APP_DATABASE_URL=$FIREBASE_DATABASE_URL
-  - REACT_APP_PROJECT_ID=$FIREBASE_PROJECT_ID
-  - REACT_APP_STORAGE_BUCKET=$FIREBASE_STORAGE_BUCKET
-  - REACT_APP_MESSAGING_SENDER_ID=$FIREBASE_MESSAGING_SENDER_ID
+    - REACT_APP_API_KEY=$FIREBASE_API_KEY
+    - REACT_APP_AUTH_DOMAIN=$FIREBASE_AUTH_DOMAIN
+    - REACT_APP_DATABASE_URL=$FIREBASE_DATABASE_URL
+    - REACT_APP_PROJECT_ID=$FIREBASE_PROJECT_ID
+    - REACT_APP_STORAGE_BUCKET=$FIREBASE_STORAGE_BUCKET
+    - REACT_APP_MESSAGING_SENDER_ID=$FIREBASE_MESSAGING_SENDER_ID
 cache:
   yarn: true
 install:
-- yarn
+  - yarn
+before_script:
+  - yarn add firebase-tools -g
+  - cd functions && yarn
 script:
-- yarn build
-- yarn test -- --coverage
+  - yarn build
+  - yarn test -- --coverage
 after_script:
-- COVERALLS_REPO_TOKEN=$COVERALLS_TOKEN yarn coveralls
-deploy:
-  skip_cleanup: true
-  provider: firebase
-  edge: true
-  token:
-    secure: $FIREBASE_TOKEN
-  project: $FIREBASE_PROJECT_ID
-after_deploy:
-  message: 'Deploy Success'
-
+  - COVERALLS_REPO_TOKEN=$COVERALLS_TOKEN yarn coveralls
+  - firebase deploy --only hosting,functions --token $FIREBASE_TOKEN
+branches:
+  only:
+    - master
