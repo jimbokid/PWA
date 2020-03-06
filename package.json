@@ -41,8 +41,8 @@
     "workbox-build": "4.3.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && npm run build-sw",
+    "start": "REACT_APP_CURRENT_GIT_NUMBER=`git rev-list --count HEAD` react-scripts start",
+    "build": "REACT_APP_CURRENT_GIT_NUMBER=`git rev-list --count HEAD` react-scripts build && npm run build-sw",
     "build-sw": "node ./src/config/cache/sw-build.js",
     "test": "react-scripts test --env=jsdom --setupFiles ./src/setupTests/setupTests.js --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/utils/userInformationHelper.js --collectCoverageFrom=!src/config/cache/*.js --collectCoverageFrom=!src/**/*Container.js --collectCoverageFrom=!src/**/index.js --collectCoverageFrom=!src/setupTests/**/*.js",
     "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
