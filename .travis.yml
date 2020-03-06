@@ -22,7 +22,7 @@ script:
   - yarn test -- --coverage
 after_script:
   - COVERALLS_REPO_TOKEN=$COVERALLS_TOKEN yarn coveralls
-  - firebase deploy --only hosting,functions --token $FIREBASE_TOKEN
+  - firebase deploy --only hosting,functions --token $FIREBASE_TOKEN --project $FIREBASE_PROJECT_ID
 branches:
   only:
     - master
