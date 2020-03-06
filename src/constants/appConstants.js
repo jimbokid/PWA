@@ -10,3 +10,5 @@ export const START_DATE_POPULAR = moment()
 export const INCLUDE_ADULT = false;
 export const LANGUAGE = 'en-US';
 export const REGION = 'US';
+
+export const IMAGE_URL = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2/';

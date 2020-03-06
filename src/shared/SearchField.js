@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Clear from '@material-ui/icons/Clear';
 import moment from 'moment/moment';
 import Avatar from '@material-ui/core/Avatar';
-import {clearSearch, fetchSearch} from '../actions/Search';
+import {clearSearch, fetchSearch} from '../routes/SearchResults/actions/Search';
 import {connect} from 'react-redux';
 
 const styles = theme => ({
