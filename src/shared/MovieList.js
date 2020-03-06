@@ -10,7 +10,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CameraAlt from '@material-ui/icons/CameraAlt';
 import grey from '@material-ui/core/colors/grey';
 import LazyLoad from 'react-lazyload';
-import {IMAGE_URL} from "../constants/dashboard";
+import {IMAGE_URL} from "../constants/appConstants";
 import GridWrapperHOC from "./GridWrapperHOC";
 import GridItemHOC from "./GridItemHOC";
 
