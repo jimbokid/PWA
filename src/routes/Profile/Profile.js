@@ -20,12 +20,12 @@ import { Link } from 'react-router-dom';
 import {
   generateListItem,
   removeFromFavorite,
-  addUserInformation,
 } from '../../utils/componentHelpers';
 
 import WithLoader from '../../shared/WithLoader';
 
 import Button from '@material-ui/core/Button';
+import {addUserInformation} from "../../utils/userInformationHelper";
 
 const uiConfig = {
   signInFlow: 'popup',

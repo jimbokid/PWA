@@ -44,7 +44,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build && npm run build-sw",
     "build-sw": "node ./src/config/cache/sw-build.js",
-    "test": "react-scripts test --env=jsdom --setupFiles ./src/setupTests/setupTests.js --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/registerServiceWorker.js --collectCoverageFrom=!src/**/*Container.js --collectCoverageFrom=!src/**/index.js --collectCoverageFrom=!src/setupTests/**/*.js",
+    "test": "react-scripts test --env=jsdom --setupFiles ./src/setupTests/setupTests.js --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/utils/userInformationHelper.js --collectCoverageFrom=!src/config/cache/*.js --collectCoverageFrom=!src/**/*Container.js --collectCoverageFrom=!src/**/index.js --collectCoverageFrom=!src/setupTests/**/*.js",
     "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
     "eject": "react-scripts eject",
     "lint:eslint": "eslint --ext=.jsx --ext=.js ./src/"
