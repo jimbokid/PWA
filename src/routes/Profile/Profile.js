@@ -45,7 +45,6 @@ const uiConfig = {
 
 
 export const Profile = () => {
-  console.log(APP_VERSION)
   return (
     <Layout>
       <MyContext.Consumer>
