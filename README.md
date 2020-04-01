@@ -3,17 +3,20 @@
 
 # Progressive web application example
 
+## Attention
+Before you start application you need `.env` file with all configs, [contact with me](mailto:jimbokid89@gmail.com) and I'll send you .env file,
+or u can't create your own with yours own firebase storage.
+
+List of parameters:
+- REACT_APP_API_KEY
+- REACT_APP_AUTH_DOMAIN
+- REACT_APP_DATABASE_URL
+- REACT_APP_PROJECT_ID
+- REACT_APP_STORAGE_BUCKET
+- REACT_APP_MESSAGING_SENDER_ID
+
 ## Demo
 [click here to look demo](https://react-pwa-d4fd9.firebaseapp.com/)
-
-<div>
-<img src="../assets/screenshots/main_screen.jpg?raw=true" width="250" align="left"> 
-<img src="../assets/screenshots/movie_detail.jpg?raw=true" width="250" align="left">
-<img src="../assets/screenshots/search_by_genre.jpg?raw=true" width="250" align="left">
-<img src="../assets/screenshots/search_panel.jpg?raw=true" width="250" align="left">
-<img src="../assets/screenshots/search_results.jpg?raw=true" width="250" align="left">
-<img src="../assets/screenshots/phone_desktop.jpg?raw=true" width="250">
-</div>
 
 ## Available Scripts
 
