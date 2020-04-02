@@ -1,6 +1,5 @@
 language: node_js
-node_js:
-  - "stable"
+node_js: "12.16.1"
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.19.0
   - export PATH=$HOME/.yarn/bin:$PATH
@@ -13,7 +12,7 @@ env:
     - REACT_APP_STORAGE_BUCKET=$FIREBASE_STORAGE_BUCKET
     - REACT_APP_MESSAGING_SENDER_ID=$FIREBASE_MESSAGING_SENDER_ID
 cache:
-  yarn: true
+  yarn: false
 install:
   - yarn
 before_script:
