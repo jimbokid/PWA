@@ -1,19 +1,10 @@
-[![Coverage Status](https://coveralls.io/repos/github/jimbokid/PWA/badge.svg?branch=master&service=github)](https://coveralls.io/github/jimbokid/PWA?branch=master)
 [![Build Status](https://travis-ci.org/jimbokid/PWA.svg?branch=master)](https://travis-ci.org/jimbokid/PWA)
 
 # Progressive web application example
 
 ## Attention
 Before you start application you need `.env` file with all configs, [contact with me](mailto:jimbokid89@gmail.com) and I'll send you .env file,
-or u can't create your own with yours own firebase storage.
-
-List of parameters:
-- REACT_APP_API_KEY
-- REACT_APP_AUTH_DOMAIN
-- REACT_APP_DATABASE_URL
-- REACT_APP_PROJECT_ID
-- REACT_APP_STORAGE_BUCKET
-- REACT_APP_MESSAGING_SENDER_ID
+or u can clone and run this app without `.env` but with some limitations like - you will not have possibility to login/logut and mark/unmark favorite movies. 
 
 ## Demo
 [click here to look demo](https://react-pwa-d4fd9.firebaseapp.com/)
@@ -29,11 +20,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br>
-For unit testing I use Jest.
 
 ### `yarn run build`
 

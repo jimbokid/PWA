@@ -19,9 +19,7 @@ before_script:
   - yarn add firebase-tools -g
 script:
   - yarn build
-  - yarn test -- --coverage
 after_script:
-  - COVERALLS_REPO_TOKEN=$COVERALLS_TOKEN yarn coveralls
   - firebase deploy --only hosting,functions --token $FIREBASE_TOKEN --project $FIREBASE_PROJECT_ID
 branches:
   only:
