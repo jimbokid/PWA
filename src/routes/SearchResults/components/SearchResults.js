@@ -168,7 +168,7 @@ export const CardWrapper = props => {
 };
 
 export class SearchResults extends React.PureComponent {
-  componentWillMount() {
+  componentDidMount() {
     const {
       match,
       fetchResultsSearch,

@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../../shared/Layout';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
-import {MyContext} from '../../shared/Auth';
+import {AuthContext} from '../../shared/Auth';
 import Typography from '@material-ui/core/Typography';
 
 import List from '@material-ui/core/List';
@@ -47,12 +47,12 @@ const uiConfig = {
 export const Profile = () => {
   return (
     <Layout>
-      <MyContext.Consumer>
+      <AuthContext.Consumer>
         {context => (
           <React.Fragment>
-            {context.state.isSignedIn === null && <WithLoader isLoading={true}/>}
+            {context.isSignedIn === null && <WithLoader isLoading={true}/>}
 
-            {!context.state.isSignedIn ? (
+            {!context.isSignedIn ? (
               <StyledFirebaseAuth
                 uiConfig={uiConfig}
                 firebaseAuth={firebase.auth()}
@@ -64,9 +64,9 @@ export const Profile = () => {
                   signed-in!
                 </Typography>
 
-                {context.state.favorites && (
+                {context.favorites && (
                   <List dense={false}>
-                    {context.state.favorites.map((item, key) => {
+                    {context.favorites.map((item, key) => {
                       const listItem = generateListItem(false, item, 'movie');
 
                       return (
@@ -96,7 +96,7 @@ export const Profile = () => {
                                 onClick={e => {
                                   e.preventDefault();
                                   removeFromFavorite(
-                                    context.state.userUid,
+                                    context.userUid,
                                     item.recordId,
                                   );
                                 }}
@@ -129,7 +129,7 @@ export const Profile = () => {
             </div>
           </React.Fragment>
         )}
-      </MyContext.Consumer>
+      </AuthContext.Consumer>
     </Layout>
   );
 }

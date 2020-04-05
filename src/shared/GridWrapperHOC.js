@@ -52,6 +52,7 @@ GridWrapperHOC.propTypes = {
   inline: PropTypes.bool,
   classes: PropTypes.object.isRequired,
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]),
+  cols: PropTypes.number
 };
 
 export default withStyles(styles)(GridWrapperHOC);

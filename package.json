@@ -41,11 +41,15 @@
     "styled-components": "4.4.1",
     "workbox-build": "4.3.1"
   },
+  "moduleDirectories": [
+    "node_modules",
+    "src"
+  ],
   "scripts": {
     "start": "REACT_APP_CURRENT_GIT_NUMBER=`git rev-list --count HEAD` react-scripts start",
     "build": "REACT_APP_CURRENT_GIT_NUMBER=`git rev-list --count HEAD` react-scripts build && npm run build-sw",
     "build-sw": "node ./src/config/cache/sw-build.js",
-    "test": "react-scripts test --env=jsdom --setupFiles ./src/setupTests/setupTests.js --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/utils/userInformationHelper.js --collectCoverageFrom=!src/config/cache/*.js --collectCoverageFrom=!src/**/*Container.js --collectCoverageFrom=!src/**/index.js --collectCoverageFrom=!src/setupTests/**/*.js",
+    "test": "react-scripts test --env=jsdom --setupFiles ./src/setupTests/setupTests.js --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/utils/userInformationHelper.js --collectCoverageFrom=!src/config/cache/*.js --collectCoverageFrom=!src/**/*Container.js --collectCoverageFrom=!src/**/index.js --collectCoverageFrom=!src/setupTests/**/*.js  --testMatch '**/*.test.js' ",
     "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
     "eject": "react-scripts eject",
     "lint:eslint": "eslint --ext=.jsx --ext=.js ./src/"
@@ -57,6 +61,7 @@
   },
   "precommit": "pretty-quick --staged",
   "devDependencies": {
+    "babel-eslint": "10.0.3",
     "coveralls": "3.0.7",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.15.1",

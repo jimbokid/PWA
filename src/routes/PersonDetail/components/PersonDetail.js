@@ -23,7 +23,7 @@ const styles = {
 };
 
 export class PersonDetail extends React.PureComponent {
-  componentWillMount() {
+  componentDidMount() {
     const {match, fetchDetailPerson} = this.props;
     const {id} = match.params;
     fetchDetailPerson(id);

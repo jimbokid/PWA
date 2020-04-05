@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Layout from '../../../shared/Layout';
 import Typography from '@material-ui/core/Typography';
 import styled from 'styled-components';
@@ -15,13 +15,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import YouTube from 'react-youtube';
-import Button from '@material-ui/core/Button';
-import { MyContext } from '../../../shared/Auth';
-import {
-  addToFavorite,
-  removeFromFavorite,
-} from '../../../utils/componentHelpers';
-import { Link } from 'react-router-dom';
+import FavoriteMovie from "./FavoriteMovie";
 
 const styles = theme => ({
   media: {
@@ -109,7 +103,7 @@ const styles = theme => ({
 
 export const Wrapper = styled.div`
   background: #949494 URL(https://image.tmdb.org/t/p/w1400_and_h450_face${props =>
-    props.backdrop_path});
+  props.backdrop_path});
   background-size: cover;
   background-position: center center;
   margin: -32px -16px 0;
@@ -118,16 +112,16 @@ export const Wrapper = styled.div`
 `;
 
 export const VideoWrapper = ({
-  data,
-  classes,
-  handleVideo,
-  openVideo,
-  showVideoClicked,
-}) => {
+                               data,
+                               classes,
+                               handleVideo,
+                               openVideo,
+                               showVideoClicked,
+                             }) => {
   return (
     <ExpansionPanel expanded={openVideo} className={classes.panelWrapper}>
       <ExpansionPanelSummary
-        expandIcon={<ExpandMoreIcon />}
+        expandIcon={<ExpandMoreIcon/>}
         onClick={handleVideo}
         id="openVideoWrapper"
       >
@@ -168,8 +162,8 @@ export class MovieDetail extends React.PureComponent {
 
   static getDerivedStateFromProps(props, state) {
     if (props.match.params.id !== state.id) {
-      const { fetchDetailMovie } = props;
-      const { id, type } = props.match.params;
+      const {fetchDetailMovie} = props;
+      const {id, type} = props.match.params;
       fetchDetailMovie(id, type);
       window.scrollTo(0, 0);
       return {
@@ -182,7 +176,7 @@ export class MovieDetail extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    const { cleanDetailPage } = this.props;
+    const {cleanDetailPage} = this.props;
     cleanDetailPage();
     this.setState({
       openVideo: false,
@@ -196,6 +190,7 @@ export class MovieDetail extends React.PureComponent {
       showVideoClicked: true,
     });
   }
+
   render() {
     const {
       data,
@@ -209,10 +204,10 @@ export class MovieDetail extends React.PureComponent {
       videos,
       keywords,
     } = this.props;
-    const { type } = match.params;
+    const {type} = match.params;
 
     if (error) {
-      return <ErrorMessage error={error} id={'errorWrapper'} />;
+      return <ErrorMessage error={error} id={'errorWrapper'}/>;
     }
 
     return (
@@ -242,71 +237,8 @@ export class MovieDetail extends React.PureComponent {
                   Add to favorite:
                 </Typography>
 
-                <MyContext.Consumer>
-                  {context => {
-                    if (context.state.isSignedIn === false) {
-                      return (
-                        <React.Fragment>
-                          <Typography gutterBottom>
-                            You need to be authorized
-                          </Typography>
-                          <Link
-                            to={`/profile/`}
-                            style={{ textDecoration: 'none' }}
-                          >
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              className={classes.button}
-                            >
-                              Login
-                            </Button>
-                          </Link>
-                        </React.Fragment>
-                      );
-                    }
-                    if (
-                      context.state.isSignedIn === null ||
-                      context.state.favorites === null ||
-                      type !== 'movie'
-                    ) {
-                      return false;
-                    }
+                <FavoriteMovie type={type} id={match.params.id} data={data}/>
 
-                    const id = match.params.id;
-                    let isFavorite = false;
-                    let recordId = null;
-
-                    context.state.favorites.forEach(item => {
-                      if (item.id === parseInt(id, 0)) {
-                        isFavorite = true;
-                        recordId = item.recordId;
-                        return false;
-                      }
-                    });
-                    return (
-                      <React.Fragment>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          className={classes.button}
-                          onClick={() => {
-                            isFavorite
-                              ? removeFromFavorite(
-                                  context.state.userUid,
-                                  recordId,
-                                )
-                              : addToFavorite(context.state.userUid, data);
-                          }}
-                        >
-                          {isFavorite
-                            ? 'Remove from favorite'
-                            : 'Add to favorite'}
-                        </Button>
-                      </React.Fragment>
-                    );
-                  }}
-                </MyContext.Consumer>
                 <TitleTextComponent
                   title={'Vote average:'}
                   text={data.vote_average}
@@ -320,7 +252,7 @@ export class MovieDetail extends React.PureComponent {
                       moment(data.first_air_date).format('MMM DD YYYY'))
                   }
                 />
-                <TitleTextComponent title={'Overview:'} text={data.overview} />
+                <TitleTextComponent title={'Overview:'} text={data.overview}/>
                 <VideoWrapper
                   classes={classes}
                   data={videos.results}
@@ -372,7 +304,8 @@ MovieDetail.propTypes = {
   error: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   videos: PropTypes.object.isRequired,
   keywords: PropTypes.array.isRequired,
-  cleanDetailPage: PropTypes.func
+  cleanDetailPage: PropTypes.func,
+  fetchDetailMovie: PropTypes.func,
 };
 
 VideoWrapper.propTypes = {

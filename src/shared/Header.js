@@ -6,9 +6,9 @@ import Logo from '../assets/icon.png';
 import {withStyles} from '@material-ui/core/styles/index';
 import {Link} from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
-
 import Search from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import {AuthContext} from './Auth';
 
 const styles = (theme) => ({
   logo: {
@@ -31,6 +31,10 @@ const styles = (theme) => ({
 })
 
 export const Header = ({classes, toggleSearch}) => {
+  const {
+    isFirebaseConfigured
+  } = React.useContext(AuthContext);
+
   return (
     <AppBar position="static" color="default">
       <div className={classes.content}>
@@ -51,7 +55,10 @@ export const Header = ({classes, toggleSearch}) => {
             <Link
               to={'/profile/'}
               aria-label="movie detail page"
-              style={{textDecoration: 'none'}}
+              style={{
+                textDecoration: 'none',
+                visibility: isFirebaseConfigured ? 'visible' : 'hidden'
+              }}
             >
               <IconButton color="primary">
                 <AccountCircle/>
