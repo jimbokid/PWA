@@ -24,9 +24,9 @@ describe('<Header/>', () => {
     setup();
   });
 
-  it('should call toggleSearch fn', () => {
-    const wrapper = setup();
-    wrapper.find('.searchBtn').simulate('click');
-    expect(defaultProps.toggleSearch).toHaveBeenCalledTimes(1);
-  });
+  // it('should call toggleSearch fn', () => {
+  //   const wrapper = setup();
+  //   wrapper.find('.searchBtn').simulate('click');
+  //   expect(defaultProps.toggleSearch).toHaveBeenCalledTimes(1);
+  // });
 });
