@@ -36,44 +36,43 @@ const styles = theme => ({
   },
 });
 
-export class Dashboard extends React.PureComponent {
-  componentDidMount() {
-    const {fetchPopularMovies} = this.props;
+const Dashboard = (props) => {
+  React.useEffect(() => {
+    const {fetchPopularMovies} = props;
     fetchPopularMovies();
-  }
 
-  componentWillUnmount() {
-    const {clearSearch} = this.props;
-    clearSearch();
-  }
-
-  render() {
-    const {
-      classes,
-      popular,
-      fetchPopularMovies,
-      total_results,
-      error,
-    } = this.props;
-
-    if (error) {
-      return <ErrorMessage error={error} id={'errorWrapper'}/>;
+    return () => {
+      const {clearSearch} = props;
+      clearSearch();
     }
+  }, []);
 
-    return (
-      <Layout>
-        <div className={classes.cardLayout}>
-          <InfiniteScroll
-            dataLength={popular.results.length}
-            next={fetchPopularMovies}
-            hasMore={popular.results.length < total_results}
-          >
-            <MovieList data={popular.results} inline={false} type={'movie'} cols={4}/>
-          </InfiniteScroll>
-        </div>
-      </Layout>
-    );
+  const {
+    classes,
+    popular,
+    fetchPopularMovies,
+    total_results,
+    error,
+  } = props;
+
+
+  if (error) {
+    return <ErrorMessage error={error} id={'errorWrapper'}/>;
   }
+
+  return (
+    <Layout>
+      <div className={classes.cardLayout}>
+        <InfiniteScroll
+          dataLength={popular.results.length}
+          next={fetchPopularMovies}
+          hasMore={popular.results.length < total_results}
+        >
+          <MovieList data={popular.results} inline={false} type={'movie'} cols={4}/>
+        </InfiniteScroll>
+      </div>
+    </Layout>
+  );
 }
 
 Dashboard.propTypes = {

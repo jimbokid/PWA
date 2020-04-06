@@ -22,57 +22,54 @@ const styles = {
   },
 };
 
-export class PersonDetail extends React.PureComponent {
-  componentDidMount() {
-    const {match, fetchDetailPerson} = this.props;
+const PersonDetail = (props) => {
+  React.useEffect(() => {
+    const {match, fetchDetailPerson} = props;
     const {id} = match.params;
     fetchDetailPerson(id);
-  }
+    return () => {
+      const {cleanPersonPage} = props;
+      cleanPersonPage();
+    }
+  }, []);
 
-  componentWillUnmount() {
-    const {cleanPersonPage} = this.props;
-    cleanPersonPage();
-  }
+  const {data, classes, isLoading, movies} = props;
 
-  render() {
-    const {data, classes, isLoading, movies} = this.props;
+  return (
+    <Layout>
+      <WithLoader isLoading={isLoading}>
+        <Avatar
+          alt={data.name}
+          className={classes.bigAvatar}
+          src={`https://image.tmdb.org/t/p/w400${data.profile_path}`}
+        />
+        <Typography variant="headline" gutterBottom align={'center'}>
+          {data.name}
+        </Typography>
 
-    return (
-      <Layout>
-        <WithLoader isLoading={isLoading}>
-          <Avatar
-            alt={data.name}
-            className={classes.bigAvatar}
-            src={`https://image.tmdb.org/t/p/w400${data.profile_path}`}
-          />
-          <Typography variant="headline" gutterBottom align={'center'}>
-            {data.name}
-          </Typography>
+        <TitleTextComponent
+          title={'Birthday:'}
+          text={data && moment(data.birthday).format('MMM DD YYYY')}
+        />
 
-          <TitleTextComponent
-            title={'Birthday:'}
-            text={data && moment(data.birthday).format('MMM DD YYYY')}
-          />
+        <TitleTextComponent
+          title={'Place of birth:'}
+          text={data.place_of_birth}
+        />
 
-          <TitleTextComponent
-            title={'Place of birth:'}
-            text={data.place_of_birth}
-          />
+        <TitleTextComponent title={'Biography:'} text={data.biography}/>
 
-          <TitleTextComponent title={'Biography:'} text={data.biography}/>
+        <Typography variant="title" gutterBottom>
+          Filmography:
+        </Typography>
 
-          <Typography variant="title" gutterBottom>
-            Filmography:
-          </Typography>
-
-          {movies && (
-            <MovieList data={movies} inline={true} type={'movie'} cols={2.2}/>
-          )}
-        </WithLoader>
-      </Layout>
-    );
-  }
-}
+        {movies && (
+          <MovieList data={movies} inline={true} type={'movie'} cols={2.2}/>
+        )}
+      </WithLoader>
+    </Layout>
+  );
+};
 
 PersonDetail.propTypes = {
   data: PropTypes.object.isRequired,
