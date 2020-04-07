@@ -34,7 +34,7 @@ export class Auth extends React.PureComponent {
               const data = snapshot.val();
               let arr = [];
               for (let key in data) {
-                if (data.hasOwnProperty(key)) {
+                if (Object.prototype.hasOwnProperty.call(data, key)) {
                   arr.push({...data[key], recordId: key});
                 }
               }

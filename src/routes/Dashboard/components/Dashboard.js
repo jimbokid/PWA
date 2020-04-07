@@ -45,6 +45,7 @@ const Dashboard = (props) => {
       const {clearSearch} = props;
       clearSearch();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const {

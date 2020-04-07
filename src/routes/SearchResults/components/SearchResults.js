@@ -69,6 +69,7 @@ const SearchResults = (props) => {
       default:
         break;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const {

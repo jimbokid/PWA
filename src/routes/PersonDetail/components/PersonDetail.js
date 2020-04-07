@@ -31,6 +31,7 @@ const PersonDetail = (props) => {
       const {cleanPersonPage} = props;
       cleanPersonPage();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const {data, classes, isLoading, movies} = props;

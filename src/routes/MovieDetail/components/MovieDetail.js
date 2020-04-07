@@ -106,6 +106,7 @@ const MovieDetail = (props) => {
       const {cleanDetailPage} = props;
       cleanDetailPage();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
