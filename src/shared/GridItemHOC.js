@@ -4,15 +4,26 @@ import Grid from "@material-ui/core/Grid";
 import GridListTile from "@material-ui/core/GridListTile";
 import {withStyles} from "@material-ui/core/styles";
 
-const styles = theme => ({
-  cardInner: {
-    padding: `0 ${theme.spacing.unit}px`,
-    width: '50%',
-    display: 'block',
-    marginBottom: theme.spacing.unit,
-    cursor: 'pointer',
-  },
-})
+const styles = theme => {
+  return {
+    cardInner: {
+      padding: `0 ${theme.spacing.unit}px`,
+      width: '20%',
+      [theme.breakpoints.down('md')]: {
+        width: '30%',
+      },
+      [theme.breakpoints.down('sm')]: {
+        width: '40%',
+      },
+      [theme.breakpoints.down('xs')]: {
+        width: '45%',
+      },
+      display: 'block',
+      marginBottom: theme.spacing.unit,
+      cursor: 'pointer',
+    },
+  }
+}
 
 const GridItemHOC = props => {
   const {

@@ -10,10 +10,11 @@ import ErrorMessage from '../../../shared/ErrorMessage';
 import TitleTextComponent from '../../../shared/TitleTextComponent';
 import GenreList from '../../../shared/GenreList';
 import PropTypes from 'prop-types';
-import FavoriteMovie from "./FavoriteMovie";
-import VideoWrapper from "./VideoWrapper";
+import FavoriteMovie from './FavoriteMovie';
+import VideoWrapper from './VideoWrapper';
+import ShareBtns from "../../../shared/ShareBtns";
 
-const styles = theme => ({
+const styles = (theme) => ({
   media: {
     height: 0,
     paddingTop: '150%',
@@ -35,13 +36,6 @@ const styles = theme => ({
     background: 'rgba(255,255,255,0.8)',
     padding: 15,
     textAlign: 'center',
-  },
-  cardInner: {
-    padding: `0 ${theme.spacing.unit}px`,
-    width: '50%',
-    display: 'block',
-    marginBottom: theme.spacing.unit,
-    cursor: 'pointer',
   },
   chip: {
     marginRight: theme.spacing.unit,
@@ -73,15 +67,28 @@ const styles = theme => ({
     marginTop: theme.spacing.unit,
     marginBottom: theme.spacing.unit,
   },
+  header: {
+    paddingTop: '20%',
+    [theme.breakpoints.down('md')]: {
+      paddingTop: '30%',
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: '40%',
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: '56.25%',
+    },
+  }
 });
 
 export const StyledHeader = styled.div`
-  background: #949494 URL(https://image.tmdb.org/t/p/w1400_and_h450_face${props =>
-  props.backdrop_path});
+  background: #949494 URL(https://image.tmdb.org/t/p/w1400_and_h450_face${(
+  props,
+) => props.backdrop_path});
   background-size: cover;
   background-position: center center;
   margin: -32px -16px 0;
-  padding-top: 56.25%;
+  
   position: relative;
 `;
 
@@ -98,21 +105,20 @@ const MovieDetail = (props) => {
       window.scrollTo(0, 0);
 
       setOpenVideo(false);
-      setShowVideoClicked(false)
-      setId(id)
+      setShowVideoClicked(false);
+      setId(id);
     }
 
     return () => {
       const {cleanDetailPage} = props;
       cleanDetailPage();
-    }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
   function handleVideo() {
     setOpenVideo(!openVideo);
-    setShowVideoClicked(true)
+    setShowVideoClicked(true);
   }
 
   const {
@@ -139,12 +145,15 @@ const MovieDetail = (props) => {
       <WithLoader isLoading={isLoading}>
         <React.Fragment>
           <div className={classes.movieInfo}>
-            <StyledHeader {...data}>
+            <StyledHeader {...data} className={classes.header}>
               <Typography variant="display1" className={classes.movieTitle}>
                 {data.title || data.original_name}
               </Typography>
             </StyledHeader>
+
             <div className={classes.infoWrapper}>
+              <ShareBtns title={data.title || data.original_name}/>
+
               <GenreList
                 data={data.genres}
                 genres={genres}
@@ -163,10 +172,13 @@ const MovieDetail = (props) => {
 
               <FavoriteMovie type={type} id={match.params.id} data={data}/>
 
-              <TitleTextComponent
-                title={'Vote average:'}
-                text={data.vote_average}
-              />
+
+              {!!(data.vote_average) && (
+                <TitleTextComponent
+                  title={'Vote average:'}
+                  text={data.vote_average}
+                />
+              )}
               <TitleTextComponent
                 title={'Release Date:'}
                 text={
@@ -193,7 +205,9 @@ const MovieDetail = (props) => {
                   inline={true}
                   type={type}
                   cast={true}
-                  cols={2.2}
+                  // cols={{
+                  //   xs:2
+                  // }}
                 />
               )}
               <Typography variant="title" gutterBottom>
@@ -204,16 +218,18 @@ const MovieDetail = (props) => {
                   data={similar.results}
                   inline={true}
                   type={type}
-                  cols={1.5}
+                  // cols={1.5}
                 />
               )}
+
+
             </div>
           </div>
         </React.Fragment>
       </WithLoader>
     </Layout>
   );
-}
+};
 
 MovieDetail.propTypes = {
   data: PropTypes.object.isRequired,

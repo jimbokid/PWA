@@ -17,7 +17,7 @@ import GridItemHOC from "./GridItemHOC";
 const styles = theme => ({
   cardInner: {
     padding: `0 ${theme.spacing.unit}px`,
-    width: '50%',
+    // width: '50%',
     display: 'block',
     marginBottom: theme.spacing.unit,
     cursor: 'pointer',

@@ -1,9 +1,9 @@
-import MovieDetail from './components/MovieDetail';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import {fetchDetailMovie, cleanDetailPage} from './actions/MovieDetail';
+import MovieDetail from "./components/MovieDetail";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { fetchDetailMovie, cleanDetailPage } from "./actions/MovieDetail";
 
-const mapStateToProps = ({moviedetail}) => ({
+const mapStateToProps = ({ moviedetail }) => ({
   data: moviedetail.data,
   similar: moviedetail.similar,
   genres: moviedetail.genres,
@@ -15,15 +15,13 @@ const mapStateToProps = ({moviedetail}) => ({
 });
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
+  return bindActionCreators(
+    {
       fetchDetailMovie,
       cleanDetailPage,
     },
     dispatch
-  )
+  );
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(MovieDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetail);

@@ -22,7 +22,6 @@ const GridWrapperHOC = props => {
   const {
     children,
     inline,
-    cols,
     classes
   } = props;
 
@@ -37,7 +36,6 @@ const GridWrapperHOC = props => {
   return (
     <GridList
       className={classes.gridList}
-      cols={cols}
       cellHeight={'auto'}
       style={{
         margin: 0,

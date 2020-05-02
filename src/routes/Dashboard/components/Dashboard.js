@@ -6,16 +6,9 @@ import MovieList from '../../../shared/MovieList';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import PropTypes from 'prop-types';
 
-const styles = theme => ({
+const styles = () => ({
   card: {
     height: '100%',
-  },
-  cardInner: {
-    padding: `0 ${theme.spacing.unit}px`,
-    width: '50%',
-    display: 'block',
-    marginBottom: theme.spacing.unit,
-    cursor: 'pointer',
   },
   media: {
     height: 0,
