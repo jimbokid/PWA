@@ -95,26 +95,24 @@ export const StyledHeader = styled.div`
 const MovieDetail = (props) => {
   const [openVideo, setOpenVideo] = React.useState(false);
   const [showVideoClicked, setShowVideoClicked] = React.useState(false);
-  const [id, setId] = React.useState(null);
 
   React.useEffect(() => {
-    if (props.match.params.id !== id) {
-      const {fetchDetailMovie} = props;
-      const {id, type} = props.match.params;
-      fetchDetailMovie(id, type);
-      window.scrollTo(0, 0);
-
-      setOpenVideo(false);
-      setShowVideoClicked(false);
-      setId(id);
-    }
-
     return () => {
       const {cleanDetailPage} = props;
       cleanDetailPage();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  React.useEffect(() => {
+    const {fetchDetailMovie} = props;
+    const {id, type} = props.match.params;
+    fetchDetailMovie(id, type);
+    window.scrollTo(0, 0);
+
+    setOpenVideo(false);
+    setShowVideoClicked(false);
+  },[props.match.params.id])
 
   function handleVideo() {
     setOpenVideo(!openVideo);
